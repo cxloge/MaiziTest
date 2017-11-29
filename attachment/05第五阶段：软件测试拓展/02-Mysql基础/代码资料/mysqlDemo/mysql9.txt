@@ -1,0 +1,735 @@
+mysql> SELECT id,sex,GROUP_CONCAT(username),
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age,
+    -> AVG(age) AS avg_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user
+    -> GROUP BY sex;
++----+--------+---------------------------------+------------+---------+---------+---------+---------+
+| id | sex    | GROUP_CONCAT(username)          | totalUsers | max_age | min_age | avg_age | sum_age |
++----+--------+---------------------------------+------------+---------+---------+---------+---------+
+|  1 | 男     | 张三,rose,king,ring,章子怡      |          5 |      56 |      11 | 27.4000 |     137 |
+|  4 | 女     | long,queen,blek,张三丰,lily     |          5 |      88 |      21 | 52.4000 |     262 |
+| 11 | 保密   | john,test1                      |          2 |      65 |      65 | 65.0000 |      65 |
++----+--------+---------------------------------+------------+---------+---------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,GROUP_CONCAT(username),
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age,
+    -> AVG(age) AS avg_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+---------------------------------------------------------------------------+------------+---------+---------+---------+---------+
+| id | sex    | GROUP_CONCAT(username)                                                    | totalUsers | max_age | min_age | avg_age | sum_age |
++----+--------+---------------------------------------------------------------------------+------------+---------+---------+---------+---------+
+|  1 | 男     | 张三,rose,king,ring,章子怡                                                |          5 |      56 |      11 | 27.4000 |     137 |
+|  4 | 女     | long,queen,blek,张三丰,lily                                               |          5 |      88 |      21 | 52.4000 |     262 |
+| 11 | 保密   | john,test1                                                                |          2 |      65 |      65 | 65.0000 |      65 |
+| 11 | NULL   | 张三,rose,king,ring,章子怡,long,queen,blek,张三丰,lily,john,test1         |         12 |      88 |      11 | 42.1818 |     464 |
++----+--------+---------------------------------------------------------------------------+------------+---------+---------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,GROUP_CONCAT(username),
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age,
+    -> AVG(age) AS avg_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP\G;
+*************************** 1. row ***************************
+                    id: 1
+                   sex: 男
+GROUP_CONCAT(username): 张三,rose,king,ring,章子怡
+            totalUsers: 5
+               max_age: 56
+               min_age: 11
+               avg_age: 27.4000
+               sum_age: 137
+*************************** 2. row ***************************
+                    id: 4
+                   sex: 女
+GROUP_CONCAT(username): long,queen,blek,张三丰,lily
+            totalUsers: 5
+               max_age: 88
+               min_age: 21
+               avg_age: 52.4000
+               sum_age: 262
+*************************** 3. row ***************************
+                    id: 11
+                   sex: 保密
+GROUP_CONCAT(username): john,test1
+            totalUsers: 2
+               max_age: 65
+               min_age: 65
+               avg_age: 65.0000
+               sum_age: 65
+*************************** 4. row ***************************
+                    id: 11
+                   sex: NULL
+GROUP_CONCAT(username): 张三,rose,king,ring,章子怡,long,queen,blek,张三丰,lily,john,test1
+            totalUsers: 12
+               max_age: 88
+               min_age: 11
+               avg_age: 42.1818
+               sum_age: 464
+4 rows in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> SELECT id,sex,GROUP_CONCAT(username),
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+---------------------------------------------------------------------------+------------+---------+---------+
+| id | sex    | GROUP_CONCAT(username)                                                    | totalUsers | max_age | min_age |
++----+--------+---------------------------------------------------------------------------+------------+---------+---------+
+|  1 | 男     | 张三,rose,king,ring,章子怡                                                |          5 |      56 |      11 |
+|  4 | 女     | long,queen,blek,张三丰,lily                                               |          5 |      88 |      21 |
+| 11 | 保密   | john,test1                                                                |          2 |      65 |      65 |
+| 11 | NULL   | 张三,rose,king,ring,章子怡,long,queen,blek,张三丰,lily,john,test1         |         12 |      88 |      11 |
++----+--------+---------------------------------------------------------------------------+------------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+------------+---------+---------+
+| id | sex    | totalUsers | max_age | min_age |
++----+--------+------------+---------+---------+
+|  1 | 男     |          5 |      56 |      11 |
+|  4 | 女     |          5 |      88 |      21 |
+| 11 | 保密   |          2 |      65 |      65 |
+| 11 | NULL   |         12 |      88 |      11 |
++----+--------+------------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+------------+---------+---------+
+| id | sex    | totalUsers | max_age | min_age |
++----+--------+------------+---------+---------+
+|  1 | 男     |          5 |      56 |      11 |
+|  4 | 女     |          5 |      88 |      21 |
+| 11 | 保密   |          2 |      65 |      65 |
+| 11 | NULL   |         12 |      88 |      11 |
++----+--------+------------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,
+    -> MIN(age) AS min_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+---------+
+| id | sex    | min_age |
++----+--------+---------+
+|  1 | 男     |      11 |
+|  4 | 女     |      21 |
+| 11 | 保密   |      65 |
+| 11 | NULL   |      11 |
++----+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM cms_user
+GROUP BY sex WITH ROLLUP' at line 2
+mysql> SELECT id,sex
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+
+| id | sex    |
++----+--------+
+|  1 | 男     |
+|  4 | 女     |
+| 11 | 保密   |
+| 11 | NULL   |
++----+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,COUNT(*)
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+----------+
+| id | sex    | COUNT(*) |
++----+--------+----------+
+|  1 | 男     |        5 |
+|  4 | 女     |        5 |
+| 11 | 保密   |        2 |
+| 11 | NULL   |       12 |
++----+--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,COUNT(*),MAX(age)
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+----------+----------+
+| id | sex    | COUNT(*) | MAX(age) |
++----+--------+----------+----------+
+|  1 | 男     |        5 |       56 |
+|  4 | 女     |        5 |       88 |
+| 11 | 保密   |        2 |       65 |
+| 11 | NULL   |       12 |       88 |
++----+--------+----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*),MAX(age),MIN(age),AVG(age),SUM(age)
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----------+----------+----------+----------+----------+
+| COUNT(*) | MAX(age) | MIN(age) | AVG(age) | SUM(age) |
++----------+----------+----------+----------+----------+
+|        5 |       56 |       11 |  27.4000 |      137 |
+|        5 |       88 |       21 |  52.4000 |      262 |
+|        2 |       65 |       65 |  65.0000 |       65 |
+|       12 |       88 |       11 |  42.1818 |      464 |
++----------+----------+----------+----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+------------+---------+---------+
+| id | sex    | totalUsers | max_age | min_age |
++----+--------+------------+---------+---------+
+|  1 | 男     |          5 |      56 |      11 |
+|  4 | 女     |          5 |      88 |      21 |
+| 11 | 保密   |          2 |      65 |      65 |
+| 11 | NULL   |         12 |      88 |      11 |
++----+--------+------------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user
+    -> GROUP BY sex WITH ROLLUP;
++----+--------+------------+---------+---------+---------+
+| id | sex    | totalUsers | max_age | min_age | sum_age |
++----+--------+------------+---------+---------+---------+
+|  1 | 男     |          5 |      56 |      11 |     137 |
+|  4 | 女     |          5 |      88 |      21 |     262 |
+| 11 | 保密   |          2 |      65 |      65 |      65 |
+| 11 | NULL   |         12 |      88 |      11 |     464 |
++----+--------+------------+---------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> GROUP BY sex;
++--------+---------------------------------+------------+---------+---------+
+| sex    | users                           | totalUsers | max_age | sum_age |
++--------+---------------------------------+------------+---------+---------+
+| 男     | 张三,rose,king,ring,章子怡      |          5 |      56 |     137 |
+| 女     | long,queen,blek,张三丰,lily     |          5 |      88 |     262 |
+| 保密   | john,test1                      |          2 |      65 |      65 |
++--------+---------------------------------+------------+---------+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> GROUP BY sex
+    -> HAVING COUNT(*)>2;
++------+---------------------------------+------------+---------+---------+
+| sex  | users                           | totalUsers | max_age | sum_age |
++------+---------------------------------+------------+---------+---------+
+| 男   | 张三,rose,king,ring,章子怡      |          5 |      56 |     137 |
+| 女   | long,queen,blek,张三丰,lily     |          5 |      88 |     262 |
++------+---------------------------------+------------+---------+---------+
+2 rows in set (0.02 sec)
+
+mysql> SELECT sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> GROUP BY sex
+    -> HAVING COUNT(*)>2 AND MAX(age)>60;
++------+--------------------------------+------------+---------+---------+
+| sex  | users                          | totalUsers | max_age | sum_age |
++------+--------------------------------+------------+---------+---------+
+| 女   | long,queen,blek,张三丰,lily    |          5 |      88 |     262 |
++------+--------------------------------+------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> WHERE id>=2
+    -> GROUP BY sex
+    -> HAVING COUNT(*)>2 AND MAX(age)>60;
++------+--------------------------------+------------+---------+---------+
+| sex  | users                          | totalUsers | max_age | sum_age |
++------+--------------------------------+------------+---------+---------+
+| 女   | lily,blek,张三丰,queen,long    |          5 |      88 |     262 |
++------+--------------------------------+------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> WHERE id>=2
+    -> HAVING COUNT(*)>2 AND MAX(age)>60;
++------+--------------------------------------------------------------------+------------+---------+---------+
+| sex  | users                                                              | totalUsers | max_age | sum_age |
++------+--------------------------------------------------------------------+------------+---------+---------+
+| 女   | 张三丰,章子怡,long,ring,queen,king,blek,rose,lily,john,test1       |         11 |      88 |     453 |
++------+--------------------------------------------------------------------+------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> WHERE id>=2
+    -> ;
++------+--------------------------------------------------------------------+------------+---------+---------+
+| sex  | users                                                              | totalUsers | max_age | sum_age |
++------+--------------------------------------------------------------------+------------+---------+---------+
+| 女   | 张三丰,章子怡,long,ring,queen,king,blek,rose,lily,john,test1       |         11 |      88 |     453 |
++------+--------------------------------------------------------------------+------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT id,sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> WHERE id>=2
+    -> ;
++----+------+--------------------------------------------------------------------+------------+---------+---------+
+| id | sex  | users                                                              | totalUsers | max_age | sum_age |
++----+------+--------------------------------------------------------------------+------------+---------+---------+
+|  2 | 女   | 张三丰,章子怡,long,ring,queen,king,blek,rose,lily,john,test1       |         11 |      88 |     453 |
++----+------+--------------------------------------------------------------------+------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT id,sex,GROUP_CONCAT(username) AS users,
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user 
+    -> WHERE id>=2
+    -> HAVING COUNT(*)>2 AND MAX(age)>60;
++----+------+--------------------------------------------------------------------+------------+---------+---------+
+| id | sex  | users                                                              | totalUsers | max_age | sum_age |
++----+------+--------------------------------------------------------------------+------------+---------+---------+
+|  2 | 女   | 张三丰,章子怡,long,ring,queen,king,blek,rose,lily,john,test1       |         11 |      88 |     453 |
++----+------+--------------------------------------------------------------------+------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   25 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY id ;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   25 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY id ASC;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   25 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY id DESC;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   25 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY age ASC;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   25 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY 1 DESC;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   25 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE cms_user SET age=12 WHERE id=5;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM cms_user ORDER BY 1 DESC;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY age ASC,id DESC;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY age ASC;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT id,age,sex,GROUP_CONCAT(username),COUNT(*) AS totalUsers,SUM(age) AS sum_age 
+    -> FROM cms_user 
+    -> WHERE id>=2 
+    -> GROUP BY sex
+    -> HAVING COUNT(*)>=2
+    -> ORDER BY age DESC,id ASC;
++----+------+--------+--------------------------------+------------+---------+
+| id | age  | sex    | GROUP_CONCAT(username)         | totalUsers | sum_age |
++----+------+--------+--------------------------------+------------+---------+
+| 11 |   65 | 保密   | john,test1                     |          2 |      65 |
+|  7 |   56 | 男     | king,章子怡,ring,rose          |          4 |     113 |
+| 10 |   32 | 女     | lily,blek,张三丰,queen,long    |          5 |     262 |
++----+------+--------+--------------------------------+------------+---------+
+3 rows in set (0.06 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY RAND();
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.14 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY RAND();
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user LIMIT 3;
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex  |
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男   |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女   |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男   |
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user ORDER BY id DESC LIMIT 5;
++----+----------+----------+-------------+------------+----------+-------+------+--------+
+| id | username | password | email       | regTime    | face     | proId | age  | sex    |
++----+----------+----------+-------------+------------+----------+-------+------+--------+
+| 12 | test1    | test1    | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+| 11 | john     | john     | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 10 | lily     | lily     | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+|  9 | rose     | rose     | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+|  8 | blek     | blek     | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
++----+----------+----------+-------------+------------+----------+-------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user LIMIT 1;
++----+----------+----------+-------------+------------+----------+-------+------+------+
+| id | username | password | email       | regTime    | face     | proId | age  | sex  |
++----+----------+----------+-------------+------------+----------+-------+------+------+
+|  1 | 张三     | zhangsan | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男   |
++----+----------+----------+-------------+------------+----------+-------+------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user LIMIT 0,1;
++----+----------+----------+-------------+------------+----------+-------+------+------+
+| id | username | password | email       | regTime    | face     | proId | age  | sex  |
++----+----------+----------+-------------+------------+----------+-------+------+------+
+|  1 | 张三     | zhangsan | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男   |
++----+----------+----------+-------------+------------+----------+-------+------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user LIMIT 1,1;
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex  |
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女   |
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user LIMIT 0,5;
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex  |
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男   |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女   |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男   |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女   |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男   |
++----+-----------+--------------+-------------+------------+----------+-------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user LIMIT 5,5;
++----+----------+----------+-------------+------------+----------+-------+------+------+
+| id | username | password | email       | regTime    | face     | proId | age  | sex  |
++----+----------+----------+-------------+------------+----------+-------+------+------+
+|  6 | queen    | queen    | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女   |
+|  7 | king     | king     | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男   |
+|  8 | blek     | blek     | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女   |
+|  9 | rose     | rose     | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男   |
+| 10 | lily     | lily     | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女   |
++----+----------+----------+-------------+------------+----------+-------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user LIMIT 10,5;
++----+----------+----------+-------------+------------+----------+-------+------+--------+
+| id | username | password | email       | regTime    | face     | proId | age  | sex    |
++----+----------+----------+-------------+------------+----------+-------+------+--------+
+| 11 | john     | john     | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 12 | test1    | test1    | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+----------+----------+-------------+------------+----------+-------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT id,sex,age,GROUP_CONCAT(username),
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age,
+    -> AVG(age) AS avg_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user
+    -> GROUP BY sex
+    -> HAVING COUNT(*)>=2
+    -> ORDER BY age DESC
+    -> LIMIT 0,2;
++----+--------+------+--------------------------------+------------+---------+---------+---------+---------+
+| id | sex    | age  | GROUP_CONCAT(username)         | totalUsers | max_age | min_age | avg_age | sum_age |
++----+--------+------+--------------------------------+------------+---------+---------+---------+---------+
+| 11 | 保密   |   65 | john,test1                     |          2 |      65 |      65 | 65.0000 |      65 |
+|  4 | 女     |   44 | long,queen,blek,张三丰,lily    |          5 |      88 |      21 | 52.4000 |     262 |
++----+--------+------+--------------------------------+------------+---------+---------+---------+---------+
+2 rows in set (0.02 sec)
+
+mysql> SELECT id,sex,age,GROUP_CONCAT(username),
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age,
+    -> AVG(age) AS avg_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user
+    -> GROUP BY sex
+    -> HAVING COUNT(*)>=2
+    -> ORDER BY age DESC
+    -> LIMIT 2,2;
++----+------+------+---------------------------------+------------+---------+---------+---------+---------+
+| id | sex  | age  | GROUP_CONCAT(username)          | totalUsers | max_age | min_age | avg_age | sum_age |
++----+------+------+---------------------------------+------------+---------+---------+---------+---------+
+|  1 | 男   |   11 | 张三,rose,king,ring,章子怡      |          5 |      56 |      11 | 24.8000 |     124 |
++----+------+------+---------------------------------+------------+---------+---------+---------+---------+
+1 row in set (0.04 sec)
+
+mysql> SELECT id,sex,age,GROUP_CONCAT(username),
+    -> COUNT(*) AS totalUsers,
+    -> MAX(age) AS max_age,
+    -> MIN(age) AS min_age,
+    -> AVG(age) AS avg_age,
+    -> SUM(age) AS sum_age
+    -> FROM cms_user
+    -> WHERE id>=1
+    -> GROUP BY sex
+    -> HAVING COUNT(*)>=2
+    -> ORDER BY age DESC
+    -> LIMIT 0,2;
++----+--------+------+--------------------------------+------------+---------+---------+---------+---------+
+| id | sex    | age  | GROUP_CONCAT(username)         | totalUsers | max_age | min_age | avg_age | sum_age |
++----+--------+------+--------------------------------+------------+---------+---------+---------+---------+
+| 11 | 保密   |   65 | john,test1                     |          2 |      65 |      65 | 65.0000 |      65 |
+|  4 | 女     |   44 | long,queen,blek,张三丰,lily    |          5 |      88 |      21 | 52.4000 |     262 |
++----+--------+------+--------------------------------+------------+---------+---------+---------+---------+
+2 rows in set (0.01 sec)
+
+mysql> \t

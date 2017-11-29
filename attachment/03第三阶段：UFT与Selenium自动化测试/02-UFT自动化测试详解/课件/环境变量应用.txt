@@ -1,0 +1,22 @@
+'初始化测试环境
+'创建日志文件夹
+Dim fso,f
+Dim testpath,scriptname
+Dim logpath,testpaths
+Dim envfilename
+testpath=environment.Value("TestDir")
+scriptname=environment.Value("TestName")
+testpaths=split(testpath,scriptname)
+If ubound(testpaths)>0 Then
+	logpath=testpaths(0)&"testlog"
+End If
+Set fso=createobject("Scripting.FileSystemObject")
+Set f=fso.CreateFolder(logpath)
+Set fso=nothing
+'加载环境变量
+envfilename=environment.ExternalFileName
+If envfilename="" Then
+	environment.LoadFromFile "c:\loginuser.xml"
+End If
+'启动应用程序
+systemutil.Run "C:\Program Files (x86)\HP\Unified Functional Testing\samples\flight\app\flight4a.exe"

@@ -1,0 +1,424 @@
+mysql> CREATE TABLE IF NOT EXISTS test7(
+    -> sex ENUM('男','女','保密    ')
+    -> );
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> INSERT test7 VALUES('男     ');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> 
+mysql> INSERT test7 VALUES('女     ');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> 
+mysql> INSERT test7 VALUES('保密');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test7;
++--------+
+| sex    |
++--------+
+| 男     |
+| 女     |
+| 保密   |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT test7 VALUES('保密1');
+ERROR 1265 (01000): Data truncated for column 'sex' at row 1
+mysql> INSERT test7 VALUES(2);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test7;
++--------+
+| sex    |
++--------+
+| 男     |
+| 女     |
+| 保密   |
+| 女     |
++--------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT test7 VALUES(0);
+ERROR 1265 (01000): Data truncated for column 'sex' at row 1
+mysql> DESC test7;
++-------+----------------------------+------+-----+---------+-------+
+| Field | Type                       | Null | Key | Default | Extra |
++-------+----------------------------+------+-----+---------+-------+
+| sex   | enum('男','女','保密')     | YES  |     | NULL    |       |
++-------+----------------------------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> INSERT test7 VALUES(NULL);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test7;
++--------+
+| sex    |
++--------+
+| 男     |
+| 女     |
+| 保密   |
+| 女     |
+| NULL   |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT test7 VALUES('');
+ERROR 1265 (01000): Data truncated for column 'sex' at row 1
+mysql> CREATE TABLE IF NOT EXISTS test8(
+    -> fav SET('A','B','C','D')
+    -> );
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> DESC test8;
++-------+----------------------+------+-----+---------+-------+
+| Field | Type                 | Null | Key | Default | Extra |
++-------+----------------------+------+-----+---------+-------+
+| fav   | set('A','B','C','D') | YES  |     | NULL    |       |
++-------+----------------------+------+-----+---------+-------+
+1 row in set (0.02 sec)
+
+mysql> INSERT test8 VALUES('ACD');
+ERROR 1265 (01000): Data truncated for column 'fav' at row 1
+mysql> 
+mysql> INSERT test8 VALUES('DBA');
+ERROR 1265 (01000): Data truncated for column 'fav' at row 1
+mysql> INSERT test8 VALUES('A,C,D');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> 
+mysql> INSERT test8 VALUES('D,B,A');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test8;
++-------+
+| fav   |
++-------+
+| A,C,D |
+| A,B,D |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT test8 VALUES(3);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test8;
++-------+
+| fav   |
++-------+
+| A,C,D |
+| A,B,D |
+| A,B   |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT test8 VALUES(15);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test8;
++---------+
+| fav     |
++---------+
+| A,C,D   |
+| A,B,D   |
+| A,B     |
+| A,B,C,D |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS test9(
+    -> birth YEAR
+    -> );
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> 
+mysql> INSERT test9 VALUES(1901);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test9 VALUES(2155);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
+|  2155 |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT test9 VALUES(2156);
+ERROR 1264 (22003): Out of range value for column 'birth' at row 1
+mysql> INSERT test9 VALUES('1988');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
+|  2155 |
+|  1988 |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT test9 VALUES(12);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
+|  2155 |
+|  1988 |
+|  2012 |
++-------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT test9 VALUES('79');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
+|  2155 |
+|  1988 |
+|  2012 |
+|  1979 |
++-------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT test9 VALUES(0);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
+|  2155 |
+|  1988 |
+|  2012 |
+|  1979 |
+|  0000 |
++-------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT test9 VALUES('0');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
+|  2155 |
+|  1988 |
+|  2012 |
+|  1979 |
+|  0000 |
+|  2000 |
++-------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT test9 VALUES('00');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test9;
++-------+
+| birth |
++-------+
+|  1901 |
+|  2155 |
+|  1988 |
+|  2012 |
+|  1979 |
+|  0000 |
+|  2000 |
+|  2000 |
++-------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS test10(
+    -> test TIME
+    -> );
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> INSERT test10 VALUES('1 12:12:12');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM test10;
++----------+
+| test     |
++----------+
+| 36:12:12 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test10 VALUES('11:11');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test10;
++----------+
+| test     |
++----------+
+| 36:12:12 |
+| 11:11:00 |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT test10 VALUES('1234');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test10;
++----------+
+| test     |
++----------+
+| 36:12:12 |
+| 11:11:00 |
+| 00:12:34 |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT test10 VALUES('12');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM test10;
++----------+
+| test     |
++----------+
+| 36:12:12 |
+| 11:11:00 |
+| 00:12:34 |
+| 00:00:12 |
++----------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT test10 VALUES('0');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM test10;
++----------+
+| test     |
++----------+
+| 36:12:12 |
+| 11:11:00 |
+| 00:12:34 |
+| 00:00:12 |
+| 00:00:00 |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT test10 VALUES(0);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM test10;
++----------+
+| test     |
++----------+
+| 36:12:12 |
+| 11:11:00 |
+| 00:12:34 |
+| 00:00:12 |
+| 00:00:00 |
+| 00:00:00 |
++----------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT test10 VALUES('66');
+ERROR 1292 (22007): Incorrect time value: '66' for column 'test' at row 1
+mysql> ? date
+Name: 'DATE'
+Description:
+DATE
+
+A date. The supported range is '1000-01-01' to '9999-12-31'. MySQL
+displays DATE values in 'YYYY-MM-DD' format, but permits assignment of
+values to DATE columns using either strings or numbers.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/date-and-time-type-overview.html
+
+
+mysql> CREATE TABLE IF NOT EXISTS test11(
+    -> test DATE
+    -> );
+Query OK, 0 rows affected (0.37 sec)
+
+mysql> INSERT test11 VALUES('12-6-7');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM test11;
++------------+
+| test       |
++------------+
+| 2012-06-07 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test11 VALUES('1267');
+ERROR 1292 (22007): Incorrect date value: '1267' for column 'test' at row 1
+mysql> INSERT test11 VALUES('12 6 7');
+ERROR 1292 (22007): Incorrect date value: '12 6 7' for column 'test' at row 1
+mysql> INSERT test11 VALUES('12/6/7');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM test11;
++------------+
+| test       |
++------------+
+| 2012-06-07 |
+| 2012-06-07 |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT test11 VALUES('120607');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test11;
++------------+
+| test       |
++------------+
+| 2012-06-07 |
+| 2012-06-07 |
+| 2012-06-07 |
++------------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT test11 VALUES('12@6/7');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM test11;
++------------+
+| test       |
++------------+
+| 2012-06-07 |
+| 2012-06-07 |
+| 2012-06-07 |
+| 2012-06-07 |
++------------+
+4 rows in set (0.00 sec)
+
+mysql> SHOW COLUMNS IN test;
+ERROR 1146 (42S02): Table 'maizi.test' doesn't exist
+mysql> SHOW COLUMNS IN test11;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| test  | date | YES  |     | NULL    |       |
++-------+------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> \q

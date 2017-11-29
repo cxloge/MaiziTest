@@ -1,0 +1,204 @@
+mysql> CREATE DATABASE maizi1;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> CREATE SCHEMA maizi2;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CREATE DATABASE maizi2;
+ERROR 1007 (HY000): Can't create database 'maizi2'; database exists
+mysql> CREATE DATABASE IF NOT EXISTS maizi2;
+Query OK, 1 row affected, 1 warning (0.00 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+-------------------------------------------------+
+| Level | Code | Message                                         |
++-------+------+-------------------------------------------------+
+| Note  | 1007 | Can't create database 'maizi2'; database exists |
++-------+------+-------------------------------------------------+
+1 row in set (0.03 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| abc                |
+| maizi1             |
+| maizi2             |
+| mysql              |
+| performance_schema |
+| test               |
+| test1              |
++--------------------+
+8 rows in set (0.09 sec)
+
+mysql> SHOW SCHEMAS;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| abc                |
+| maizi1             |
+| maizi2             |
+| mysql              |
+| performance_schema |
+| test               |
+| test1              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> SHOW CREATE DATABASE test1;
++----------+----------------------------------------------------------------+
+| Database | Create Database                                                |
++----------+----------------------------------------------------------------+
+| test1    | CREATE DATABASE `test1` /*!40100 DEFAULT CHARACTER SET utf8 */ |
++----------+----------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE SCHEMA maizi1;
++----------+-----------------------------------------------------------------+
+| Database | Create Database                                                 |
++----------+-----------------------------------------------------------------+
+| maizi1   | CREATE DATABASE `maizi1` /*!40100 DEFAULT CHARACTER SET utf8 */ |
++----------+-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE DATABASE IF NOT EXISTS maizi3 DEFAULT CHARACTER SET = 'GBK';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| abc                |
+| maizi1             |
+| maizi2             |
+| maizi3             |
+| mysql              |
+| performance_schema |
+| test               |
+| test1              |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> SHOW CREATE DATABASE maizi3;
++----------+----------------------------------------------------------------+
+| Database | Create Database                                                |
++----------+----------------------------------------------------------------+
+| maizi3   | CREATE DATABASE `maizi3` /*!40100 DEFAULT CHARACTER SET gbk */ |
++----------+----------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE DATABASE IF NOT EXISTS CHARACTER SET 'GBK';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CHARACTER SET 'GBK'' at line 1
+mysql> CREATE DATABASE IF NOT EXISTS maizi4 CHARACTER SET 'GBK';
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| abc                |
+| maizi1             |
+| maizi2             |
+| maizi3             |
+| maizi4             |
+| mysql              |
+| performance_schema |
+| test               |
+| test1              |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> SHOW CREATE DATABASE maizi4;
++----------+----------------------------------------------------------------+
+| Database | Create Database                                                |
++----------+----------------------------------------------------------------+
+| maizi4   | CREATE DATABASE `maizi4` /*!40100 DEFAULT CHARACTER SET gbk */ |
++----------+----------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER DATABASE maizi4 DEFAULT CHARACTER SET utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW CREATE DATABASE maizi4;
++----------+-----------------------------------------------------------------+
+| Database | Create Database                                                 |
++----------+-----------------------------------------------------------------+
+| maizi4   | CREATE DATABASE `maizi4` /*!40100 DEFAULT CHARACTER SET utf8 */ |
++----------+-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER DATABASE maizi3 DEFAULT CHARACTER SET=UTF8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW CREATE DATABASE maizi3;
++----------+-----------------------------------------------------------------+
+| Database | Create Database                                                 |
++----------+-----------------------------------------------------------------+
+| maizi3   | CREATE DATABASE `maizi3` /*!40100 DEFAULT CHARACTER SET utf8 */ |
++----------+-----------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> USE maizi3;
+Database changed
+mysql> USE maizi4;
+Database changed
+mysql> USE mysql;
+Database changed
+mysql> SELECT DATABASE();
++------------+
+| DATABASE() |
++------------+
+| mysql      |
++------------+
+1 row in set (0.00 sec)
+
+mysql> USE maizi4;
+Database changed
+mysql> SELECT DATABASE();
++------------+
+| DATABASE() |
++------------+
+| maizi4     |
++------------+
+1 row in set (0.00 sec)
+
+mysql> DROP DATABASE maizi4;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| abc                |
+| maizi1             |
+| maizi2             |
+| maizi3             |
+| mysql              |
+| performance_schema |
+| test               |
+| test1              |
++--------------------+
+9 rows in set (0.01 sec)
+
+mysql> DROP DATABASE maizi3;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DROP DATABASE maizi3;
+ERROR 1008 (HY000): Can't drop database 'maizi3'; database doesn't exist
+mysql> DROP DATABASE IF EXISTS maizi3;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+------------------------------------------------------+
+| Level | Code | Message                                              |
++-------+------+------------------------------------------------------+
+| Note  | 1008 | Can't drop database 'maizi3'; database doesn't exist |
++-------+------+------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> \q

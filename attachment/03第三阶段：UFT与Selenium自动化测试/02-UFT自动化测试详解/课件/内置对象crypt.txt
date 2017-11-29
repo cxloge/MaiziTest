@@ -1,0 +1,6 @@
+Dim password
+password=crypt.Encrypt(datatable("password","Action1"))
+Dialog("Login").WinEdit("Agent Name:").Set "mercury"
+Dialog("Login").WinEdit("Password:").SetSecure password
+Dialog("Login").WinButton("OK").Click
+Window("Flight Reservation").Close

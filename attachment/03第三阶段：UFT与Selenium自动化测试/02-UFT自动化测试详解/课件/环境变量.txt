@@ -1,0 +1,13 @@
+Dim username,password
+Dim envrronmentfile
+environmentfile=environment.ExternalFileName
+If environmentfile="" Then
+	msgbox "环境变量配置文件尚未导入"
+	environment.LoadFromFile "c:\loginuser.xml"
+End If
+username=environment.Value("username")
+password=environment.Value("password")
+systemutil.Run "C:\Program Files (x86)\HP\Unified Functional Testing\samples\flight\app\flight4a.exe"
+dialog("Login").WinEdit("Agent Name:").Set username
+dialog("Login").WinEdit("Password:").Set password
+dialog("Login").WinButton("OK").Click

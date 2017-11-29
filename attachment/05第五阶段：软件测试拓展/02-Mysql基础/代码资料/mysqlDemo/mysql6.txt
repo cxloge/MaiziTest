@@ -1,0 +1,1809 @@
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
++-----------------+
+15 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user1(
+    -> id INT PRIMARY KEY,
+    -> username VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> DESC user1;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | NULL    |       |
+| username | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> SHOW CREATE TABLE user1;
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                     |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+| user1 | CREATE TABLE `user1` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++-------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.02 sec)
+
+mysql> INSERT user1 VALUES(1,'king');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT user1 VALUES(13,'QUEEN');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM user1;
++----+----------+
+| id | username |
++----+----------+
+|  1 | king     |
+| 13 | QUEEN    |
++----+----------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user1 VALUES(13,'QUEEN');
+ERROR 1062 (23000): Duplicate entry '13' for key 'PRIMARY'
+mysql> SELECT * FROM user1 WHERE id=1;
++----+----------+
+| id | username |
++----+----------+
+|  1 | king     |
++----+----------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user2(
+    -> id INT,
+    -> username VARCHAR(20),
+    -> card CHAR(18),
+    -> PRIMARY KEY(id,card)
+    -> );
+Query OK, 0 rows affected (0.23 sec)
+
+mysql> DESC user2;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | 0       |       |
+| username | varchar(20) | YES  |     | NULL    |       |
+| card     | char(18)    | NO   | PRI |         |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> INSERT user2 VALUES(1,'king','111');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM user2;
++----+----------+------+
+| id | username | card |
++----+----------+------+
+|  1 | king     | 111  |
++----+----------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user2 VALUES(1,'queen','112');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM user2;
++----+----------+------+
+| id | username | card |
++----+----------+------+
+|  1 | king     | 111  |
+|  1 | queen    | 112  |
++----+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user2 VALUES(1,'queen','112');
+ERROR 1062 (23000): Duplicate entry '1-112' for key 'PRIMARY'
+mysql> SHOW CREATE TABLE user2;
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                               |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user2 | CREATE TABLE `user2` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `username` varchar(20) DEFAULT NULL,
+  `card` char(18) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`,`card`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user3(
+    -> id INT KEY,
+    -> username VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> DESC user3;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | NULL    |       |
+| username | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user4(
+    -> id INT,
+    -> username VARCHAR(20) KEY
+    -> );
+Query OK, 0 rows affected (0.44 sec)
+
+mysql> DESC user4;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | YES  |     | NULL    |       |
+| username | varchar(20) | NO   | PRI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user5(
+    -> id SMALLINT KEY AUTO_INCREMENT,
+    -> username VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> DESC user5;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | smallint(6) | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20) | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.11 sec)
+
+mysql> INSERT user5 VALUES(1,'KING');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT user5(username) VALUES('queen');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM user5;
++----+----------+
+| id | username |
++----+----------+
+|  1 | KING     |
+|  2 | queen    |
++----+----------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user5 VALUES(111,'KING1');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user5;
++-----+----------+
+| id  | username |
++-----+----------+
+|   1 | KING     |
+|   2 | queen    |
+| 111 | KING1    |
++-----+----------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT user5(username) VALUES('queen1');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM user5;
++-----+----------+
+| id  | username |
++-----+----------+
+|   1 | KING     |
+|   2 | queen    |
+| 111 | KING1    |
+| 112 | queen1   |
++-----+----------+
+4 rows in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE user5;
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                           |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user5 | CREATE TABLE `user5` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8 |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user5 VALUES(NULL,'AAAA');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM user5;
++-----+----------+
+| id  | username |
++-----+----------+
+|   1 | KING     |
+|   2 | queen    |
+| 111 | KING1    |
+| 112 | queen1   |
+| 113 | AAAA     |
++-----+----------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT user5 VALUES(DEFAULT,'AAAA');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM user5;
++-----+----------+
+| id  | username |
++-----+----------+
+|   1 | KING     |
+|   2 | queen    |
+| 111 | KING1    |
+| 112 | queen1   |
+| 113 | AAAA     |
+| 114 | AAAA     |
++-----+----------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user6(
+    -> id SMALLINT KEY AUTO_INCREMENT,
+    -> username VARCHAR(20)
+    -> )AUTO_INCREMENT=100;
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> SHOW CREATE TABLE user6;
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                           |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user6 | CREATE TABLE `user6` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user6(username) VALUES('queen1');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM user6;
++-----+----------+
+| id  | username |
++-----+----------+
+| 100 | queen1   |
++-----+----------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user6 AUTO_INCREMENT =500;
+Query OK, 0 rows affected (0.18 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW CREATE TABLE user6;
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                           |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user6 | CREATE TABLE `user6` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=500 DEFAULT CHARSET=utf8 |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user6(username) VALUES('queen1');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM user6;
++-----+----------+
+| id  | username |
++-----+----------+
+| 100 | queen1   |
+| 500 | queen1   |
++-----+----------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user7(
+    -> id INT UNSIGNED KEY AUTO_INCREMENT,
+    -> username VARCHAR(20) NOT NULL,
+    -> password CHAR(32) NOT NULL,
+    -> age TINYINT UNSIGNED
+    -> );
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> DESC user7;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | int(10) unsigned    | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   |     | NULL    |                |
+| password | char(32)            | NO   |     | NULL    |                |
+| age      | tinyint(3) unsigned | YES  |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+4 rows in set (0.03 sec)
+
+mysql> INSERT user7(username,password) VALUES('KING','KING');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> SELECT * FROM user7;
++----+----------+----------+------+
+| id | username | password | age  |
++----+----------+----------+------+
+|  1 | KING     | KING     | NULL |
++----+----------+----------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user7(username,password,age) VALUES('KING1','KING1',12);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT *FROM user7;
++----+----------+----------+------+
+| id | username | password | age  |
++----+----------+----------+------+
+|  1 | KING     | KING     | NULL |
+|  2 | KING1    | KING1    |   12 |
++----+----------+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user7(username,password) VALUES(NULL,NULL);
+ERROR 1048 (23000): Column 'username' cannot be null
+mysql> CREATE TABLE IF NOT EXISTS user8(
+    -> id INT UNSIGNED KEY AUTO_INCREMENT,
+    -> username VARCHAR(20) NOT NULL,
+    -> password CHAR(32) NOT NULL,
+    -> age TINYINT UNSIGNED DEFAULT 18,
+    -> addr VARCHAR(50) NOT NULL DEFAULT '北京',
+    -> sex ENUM('男','女','保密') NOT NULL DEFAULT '男'
+    -> );
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> DESC user8;
++----------+----------------------------+------+-----+---------+----------------+
+| Field    | Type                       | Null | Key | Default | Extra          |
++----------+----------------------------+------+-----+---------+----------------+
+| id       | int(10) unsigned           | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)                | NO   |     | NULL    |                |
+| password | char(32)                   | NO   |     | NULL    |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18      |                |
+| addr     | varchar(50)                | NO   |     | 北京    |                |
+| sex      | enum('男','女','保密')     | NO   |     | 男      |                |
++----------+----------------------------+------+-----+---------+----------------+
+6 rows in set (0.07 sec)
+
+mysql> INSERT user8(username,password) VALUES('KING','KING');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM user8;
++----+----------+----------+------+--------+-----+
+| id | username | password | age  | addr   | sex |
++----+----------+----------+------+--------+-----+
+|  1 | KING     | KING     |   18 | 北京   | 男  |
++----+----------+----------+------+--------+-----+
+1 row in set (0.00 sec)
+
+mysql> INSERT user8 VALUES(2,'QUEEN','QUEEN',29,'上海','保密');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user8;
++----+----------+----------+------+--------+--------+
+| id | username | password | age  | addr   | sex    |
++----+----------+----------+------+--------+--------+
+|  1 | KING     | KING     |   18 | 北京   | 男     |
+|  2 | QUEEN    | QUEEN    |   29 | 上海   | 保密   |
++----+----------+----------+------+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user8 VALUES(2,'QUEEN','QUEEN',DEFAULT,DEFAULT,'保密');
+ERROR 1062 (23000): Duplicate entry '2' for key 'PRIMARY'
+mysql> INSERT user8 VALUES(3,'QUEEN','QUEEN',DEFAULT,DEFAULT,'保密');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM user8;
++----+----------+----------+------+--------+--------+
+| id | username | password | age  | addr   | sex    |
++----+----------+----------+------+--------+--------+
+|  1 | KING     | KING     |   18 | 北京   | 男     |
+|  2 | QUEEN    | QUEEN    |   29 | 上海   | 保密   |
+|  3 | QUEEN    | QUEEN    |   18 | 北京   | 保密   |
++----+----------+----------+------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user9(
+    -> id TINYINT UNSIGNED KEY AUTO_INCREMENT,
+    -> username VARCHAR(20) NOT NULL UNIQUE,
+    -> card CHAR(18) UNIQUE
+    -> );
+Query OK, 0 rows affected (0.41 sec)
+
+mysql> DESC user9;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| card     | char(18)            | YES  | UNI | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+3 rows in set (0.05 sec)
+
+mysql> SHOW CREATE TABLE user9;
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                                                |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user9 | CREATE TABLE `user9` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `card` (`card`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user9(username) VALUES('A');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT user9(username) VALUES('A1');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user9;
++----+----------+------+
+| id | username | card |
++----+----------+------+
+|  1 | A        | NULL |
+|  2 | A1       | NULL |
++----+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user9(username) VALUES('A1');
+ERROR 1062 (23000): Duplicate entry 'A1' for key 'username'
+mysql> INSERT user9(username,card) VALUES('B','111');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> 
+mysql> INSERT user9(username,card) VALUES('B1',NULL);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> 
+mysql> INSERT user9(username,card) VALUES('B2',NULL);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> SELECT * FROM user9;
++----+----------+------+
+| id | username | card |
++----+----------+------+
+|  1 | A        | NULL |
+|  2 | A1       | NULL |
+|  4 | B        | 111  |
+|  5 | B1       | NULL |
+|  6 | B2       | NULL |
++----+----------+------+
+5 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+24 rows in set (0.02 sec)
+
+mysql> DESC user;
++----------+-------------------------------+------+-----+---------+-------+
+| Field    | Type                          | Null | Key | Default | Extra |
++----------+-------------------------------+------+-----+---------+-------+
+| id       | smallint(6)                   | YES  |     | NULL    |       |
+| username | varchar(20)                   | YES  |     | NULL    |       |
+| age      | tinyint(4)                    | YES  |     | NULL    |       |
+| sex      | enum('鐢','濂','淇濆瘑')      | YES  |     | NULL    |       |
+| email    | varchar(50)                   | YES  |     | NULL    |       |
+| addr     | varchar(200)                  | YES  |     | NULL    |       |
+| birth    | year(4)                       | YES  |     | NULL    |       |
+| salary   | float(8,2)                    | YES  |     | NULL    |       |
+| tel      | int(11)                       | YES  |     | NULL    |       |
+| married  | tinyint(1)                    | YES  |     | NULL    |       |
++----------+-------------------------------+------+-----+---------+-------+
+10 rows in set (0.07 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+24 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user10(
+    -> id SMALLINT UNSIGNED KEY AUTO_INCREMENT,
+    -> username VARCHAR(20) NOT NULL UNIQUE,
+    -> password CHAR(32) NOT NULL,
+    -> email VARCHAR(50) NOT NULL DEFAULT '382771946@qq.com',
+    -> age TINYINT UNSIGNED DEFAULT 18,
+    -> sex ENUM('男','女','保密') DEFAULT '保密',
+    -> addr VARCHAR(200) NOT NULL DEFAULT '北京',
+    -> salary FLOAT(6,2),
+    -> regTime INT UNSIGNED,
+    -> face CHAR(100) NOT NULL DEFAULT 'default.jpg'
+    -> );
+Query OK, 0 rows affected (0.52 sec)
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
++----------+----------------------------+------+-----+------------------+----------------+
+10 rows in set (0.04 sec)
+
+mysql> ALTER TABLE user10 RENAME TO user11;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user11          |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+25 rows in set (0.00 sec)
+
+mysql> ALTER TABLE user11 RENAME AS user10;
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user10          |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+25 rows in set (0.00 sec)
+
+mysql> ALTER TABLE user10 RENAME user11;
+Query OK, 0 rows affected (0.18 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user11          |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+25 rows in set (0.00 sec)
+
+mysql> RENAME TABLE user11 TO user10;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user10          |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+25 rows in set (0.00 sec)
+
+mysql> RENAME TABLE user10 user11;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'user11' at line 1
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
++----------+----------------------------+------+-----+------------------+----------------+
+10 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 ADD card CHAR(18);
+Query OK, 0 rows affected (0.79 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 ADD test1 VARCHAR(100) NOT NULL UNQIUE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'UNQIUE' at line 1
+mysql> ALTER TABLE user10 ADD test1 VARCHAR(100) NOT NULL UNIQUE;
+Query OK, 0 rows affected (0.57 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| test1    | varchar(100)               | NO   | UNI | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+12 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 ADD test2 VARCHAR(20) NOT NULL FIRST;
+Query OK, 0 rows affected (0.51 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| test2    | varchar(20)                | NO   |     | NULL             |                |
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| test1    | varchar(100)               | NO   | UNI | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+13 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 ADD test3 INT NOT NULL DEFAULT 100 AFTER username;
+Query OK, 0 rows affected (0.96 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| test2    | varchar(20)                | NO   |     | NULL             |                |
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| test3    | int(11)                    | NO   |     | 100              |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| test1    | varchar(100)               | NO   | UNI | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+14 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 
+    -> 
+    -> ADD test4 INT NOT NULL DEFAULT 123 AFTER password,
+    -> 
+    -> ADD test5 FLOAT(6,2) FIRST,
+    -> 
+    -> ADD test6 SET('A','B','C');
+Query OK, 0 rows affected (0.60 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| test5    | float(6,2)                 | YES  |     | NULL             |                |
+| test2    | varchar(20)                | NO   |     | NULL             |                |
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| test3    | int(11)                    | NO   |     | 100              |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| test4    | int(11)                    | NO   |     | 123              |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| test1    | varchar(100)               | NO   | UNI | NULL             |                |
+| test6    | set('A','B','C')           | YES  |     | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+17 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 DROP test6;
+Query OK, 0 rows affected (0.72 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| test5    | float(6,2)                 | YES  |     | NULL             |                |
+| test2    | varchar(20)                | NO   |     | NULL             |                |
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| test3    | int(11)                    | NO   |     | 100              |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| test4    | int(11)                    | NO   |     | 123              |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| test1    | varchar(100)               | NO   | UNI | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+16 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 DROP test1;
+Query OK, 0 rows affected (0.49 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| test5    | float(6,2)                 | YES  |     | NULL             |                |
+| test2    | varchar(20)                | NO   |     | NULL             |                |
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| test3    | int(11)                    | NO   |     | 100              |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| test4    | int(11)                    | NO   |     | 123              |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+15 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 
+    -> 
+    -> DROP test2,
+    -> 
+    -> DROP test3,
+    -> 
+    -> DROP test4,
+    -> 
+    -> DROP test5;
+Query OK, 0 rows affected (0.65 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| addr     | varchar(200)               | NO   |     | 北京             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 
+    -> 
+    -> ADD test INT UNSIGNED NOT NULL DEFAULT 10 AFTER sex,
+    -> 
+    -> DROP addr;
+Query OK, 0 rows affected (0.67 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| test     | int(10) unsigned           | NO   |     | 10               |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.00 sec)
+
+mysql> ALTER TABLE user10 MODIFY email VARCHAR(200);
+Query OK, 0 rows affected (0.75 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+-------------+----------------+
+| Field    | Type                       | Null | Key | Default     | Extra          |
++----------+----------------------------+------+-----+-------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL        | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL        |                |
+| password | char(32)                   | NO   |     | NULL        |                |
+| email    | varchar(200)               | YES  |     | NULL        |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18          |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密        |                |
+| test     | int(10) unsigned           | NO   |     | 10          |                |
+| salary   | float(6,2)                 | YES  |     | NULL        |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL        |                |
+| face     | char(100)                  | NO   |     | default.jpg |                |
+| card     | char(18)                   | YES  |     | NULL        |                |
++----------+----------------------------+------+-----+-------------+----------------+
+11 rows in set (0.04 sec)
+
+mysql> ALTER TABLE user10 MODIFY email VARCHAR(50) NOT NULL DEFAULT '382771946@qq.com';
+Query OK, 0 rows affected (0.92 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| test     | int(10) unsigned           | NO   |     | 10               |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.00 sec)
+
+mysql> ALTER TABLE user10 MODIFY card CHAR(18) AFTER test;
+Query OK, 0 rows affected (0.44 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| test     | int(10) unsigned           | NO   |     | 10               |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 MODIFY test CHAR(32) NOT NULL DEFAULT '123' FIRST;
+Query OK, 0 rows affected (0.60 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| test     | char(32)                   | NO   |     | 123              |                |
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 CHANGE test test1 CHAR(32) NOT NULL DEFAULT '123';
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| test1    | char(32)                   | NO   |     | 123              |                |
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 CHANGE test1 test VARCHAR(200) NOT NULL AFTER username;
+Query OK, 0 rows affected (0.62 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| test     | varchar(200)               | NO   |     | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user10 CHANGE test test INT;
+Query OK, 0 rows affected (0.76 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user10;
++----------+----------------------------+------+-----+------------------+----------------+
+| Field    | Type                       | Null | Key | Default          | Extra          |
++----------+----------------------------+------+-----+------------------+----------------+
+| id       | smallint(5) unsigned       | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)                | NO   | UNI | NULL             |                |
+| test     | int(11)                    | YES  |     | NULL             |                |
+| password | char(32)                   | NO   |     | NULL             |                |
+| email    | varchar(50)                | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned        | YES  |     | 18               |                |
+| sex      | enum('男','女','保密')     | YES  |     | 保密             |                |
+| card     | char(18)                   | YES  |     | NULL             |                |
+| salary   | float(6,2)                 | YES  |     | NULL             |                |
+| regTime  | int(10) unsigned           | YES  |     | NULL             |                |
+| face     | char(100)                  | NO   |     | default.jpg      |                |
++----------+----------------------------+------+-----+------------------+----------------+
+11 rows in set (0.04 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user10          |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+25 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user11(
+    -> id TINYINT UNSIGNED KEY AUTO_INCREMENT ,
+    -> username VARCHAR(20) NOT NULL UNIQUE,
+    -> age TINYINT UNSIGNED
+    -> );
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> DESC user11;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| age      | tinyint(3) unsigned | YES  |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+3 rows in set (0.04 sec)
+
+mysql> ALTER TABLE user11 ALTER age SET DEFAULT 18;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user11;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| age      | tinyint(3) unsigned | YES  |     | 18      |                |
++----------+---------------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user11 ADD email VARCHAR(50) ;
+Query OK, 0 rows affected (0.76 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user11;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| age      | tinyint(3) unsigned | YES  |     | 18      |                |
+| email    | varchar(50)         | YES  |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user11 ALTER email SET DEFAULT '382771946@qq.com';
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user11;
++----------+---------------------+------+-----+------------------+----------------+
+| Field    | Type                | Null | Key | Default          | Extra          |
++----------+---------------------+------+-----+------------------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL             |                |
+| age      | tinyint(3) unsigned | YES  |     | 18               |                |
+| email    | varchar(50)         | YES  |     | 382771946@qq.com |                |
++----------+---------------------+------+-----+------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE user11 ALTER age DROP DEFAULT;
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user11;
++----------+---------------------+------+-----+------------------+----------------+
+| Field    | Type                | Null | Key | Default          | Extra          |
++----------+---------------------+------+-----+------------------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL             |                |
+| age      | tinyint(3) unsigned | YES  |     | NULL             |                |
+| email    | varchar(50)         | YES  |     | 382771946@qq.com |                |
++----------+---------------------+------+-----+------------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE user11 ALTER email DROP DEFAULT;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC email;
+ERROR 1146 (42S02): Table 'maizi.email' doesn't exist
+mysql> DESC user11;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| age      | tinyint(3) unsigned | YES  |     | NULL    |                |
+| email    | varchar(50)         | YES  |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS test12(
+    -> id INT
+    -> );
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> DESC test12;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | YES  |     | NULL    |       |
++-------+---------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> ALTER TABLE test12 ADD PRIMARY KEY(id);
+Query OK, 0 rows affected (0.46 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC test12;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | NO   | PRI | 0       |       |
++-------+---------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS test13(
+    -> id INT,
+    -> card CHAR(18),
+    -> username VARCHAR(20) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.33 sec)
+
+mysql> DESC test13;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | YES  |     | NULL    |       |
+| card     | char(18)    | YES  |     | NULL    |       |
+| username | varchar(20) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> ALTER TABLE test13 ADD PRIMARY KEY(id,card);
+Query OK, 0 rows affected (0.55 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC test13;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | 0       |       |
+| card     | char(18)    | NO   | PRI |         |       |
+| username | varchar(20) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> ALTER TABLE test12 DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.70 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC test12;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | NO   |     | 0       |       |
++-------+---------+------+-----+---------+-------+
+1 row in set (0.02 sec)
+
+mysql> ALTER TABLE test13 DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.60 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC test13;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   |     | 0       |       |
+| card     | char(18)    | NO   |     |         |       |
+| username | varchar(20) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> ALTER TABLE test12 ADD CONSTRAINT symbol PRIMARY KEY index_type(id);
+Query OK, 0 rows affected (0.50 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC test12;
++-------+---------+------+-----+---------+-------+
+| Field | Type    | Null | Key | Default | Extra |
++-------+---------+------+-----+---------+-------+
+| id    | int(11) | NO   | PRI | 0       |       |
++-------+---------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS test14(
+    -> id INT UNSIGNED KEY AUTO_INCREMENT
+    -> );
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> DESC test14;
++-------+------------------+------+-----+---------+----------------+
+| Field | Type             | Null | Key | Default | Extra          |
++-------+------------------+------+-----+---------+----------------+
+| id    | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
++-------+------------------+------+-----+---------+----------------+
+1 row in set (0.03 sec)
+
+mysql> ALTER TABLE test14 DROP PRIMARY KEY ;
+ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+mysql> ALTER TABLE test14 MODIFY id INT UNSIGNED;
+Query OK, 0 rows affected (0.62 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC test14;
++-------+------------------+------+-----+---------+-------+
+| Field | Type             | Null | Key | Default | Extra |
++-------+------------------+------+-----+---------+-------+
+| id    | int(10) unsigned | NO   | PRI | 0       |       |
++-------+------------------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> ALTER TABLE test14 DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.64 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC test14;
++-------+------------------+------+-----+---------+-------+
+| Field | Type             | Null | Key | Default | Extra |
++-------+------------------+------+-----+---------+-------+
+| id    | int(10) unsigned | NO   |     | 0       |       |
++-------+------------------+------+-----+---------+-------+
+1 row in set (0.01 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user12(
+    -> id TINYINT UNSIGNED KEY AUTO_INCREMENT,
+    -> username VARCHAR(20) NOT NULL,
+    -> card CHAR(18) NOT NULL,
+    -> test VARCHAR(20) NOT NULL,
+    -> test1 CHAR(32) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> DESC user12;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   |     | NULL    |                |
+| card     | char(18)            | NO   |     | NULL    |                |
+| test     | varchar(20)         | NO   |     | NULL    |                |
+| test1    | char(32)            | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+5 rows in set (0.03 sec)
+
+mysql> ALTER TABLE user12 ADD UNIQUE(username);
+Query OK, 0 rows affected (0.38 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user12;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| card     | char(18)            | NO   |     | NULL    |                |
+| test     | varchar(20)         | NO   |     | NULL    |                |
+| test1    | char(32)            | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> SHOW CREATE TABLE user12;
++--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                                                                                                                                                                                                                           |
++--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user12 | CREATE TABLE `user12` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) NOT NULL,
+  `test` varchar(20) NOT NULL,
+  `test1` char(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user12 ADD CONSTARINT symbol uni_card UNIQUE KEY(card);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'symbol uni_card UNIQUE KEY(card)' at line 1
+mysql> ALTER TABLE user12 ADD CONSTARINT symbol  UNIQUE KEY uni_card(card);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'symbol  UNIQUE KEY uni_card(card)' at line 1
+mysql> ALTER TABLE user12 ADD CONSTRAINT symbol uni_card UNIQUE KEY(card);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'uni_card UNIQUE KEY(card)' at line 1
+mysql> ALTER TABLE user12 ADD CONSTRAINT symbol  UNIQUE KEY uni_card(card);
+Query OK, 0 rows affected (0.24 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user12;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| card     | char(18)            | NO   | UNI | NULL    |                |
+| test     | varchar(20)         | NO   |     | NULL    |                |
+| test1    | char(32)            | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE user12;
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                                                                                                                                                                                                                                                             |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user12 | CREATE TABLE `user12` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) NOT NULL,
+  `test` varchar(20) NOT NULL,
+  `test1` char(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `uni_card` (`card`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user12 ADD CONSTRAINT symbol UNIQUE INDEX mulUni_test_test1(test,test1);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user12;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL    |                |
+| card     | char(18)            | NO   | UNI | NULL    |                |
+| test     | varchar(20)         | NO   | MUL | NULL    |                |
+| test1    | char(32)            | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE user12;
++--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                                                                                                                                                                                                                                                                                                                |
++--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user12 | CREATE TABLE `user12` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) NOT NULL,
+  `test` varchar(20) NOT NULL,
+  `test1` char(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `uni_card` (`card`),
+  UNIQUE KEY `mulUni_test_test1` (`test`,`test1`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user12 DROP INDEX username;
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user12;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   |     | NULL    |                |
+| card     | char(18)            | NO   | UNI | NULL    |                |
+| test     | varchar(20)         | NO   | MUL | NULL    |                |
+| test1    | char(32)            | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> ALTER TABLE user12 DROP KEY uni_card;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> ALTER TABLE user12 DROP KEY mulUni_test_test1;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC user12;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(20)         | NO   |     | NULL    |                |
+| card     | char(18)            | NO   |     | NULL    |                |
+| test     | varchar(20)         | NO   |     | NULL    |                |
+| test1    | char(32)            | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> SHOW CREATE TABLE user12;
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                                                                                                                                                                                     |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user12 | CREATE TABLE `user12` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) NOT NULL,
+  `test` varchar(20) NOT NULL,
+  `test1` char(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user12 ENGINE=MyISAM;
+Query OK, 0 rows affected (0.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW CREATE TABLE user12;
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                                                                                                                                                                                     |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user12 | CREATE TABLE `user12` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) NOT NULL,
+  `test` varchar(20) NOT NULL,
+  `test1` char(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user12 ENGINE=INNODB;
+Query OK, 0 rows affected (0.30 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW CREATE TABLE user12;
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                                                                                                                                                                                     |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user12 | CREATE TABLE `user12` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) NOT NULL,
+  `test` varchar(20) NOT NULL,
+  `test1` char(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
++--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user12 AUTO_INCREMENT=100;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW CREATE TABLE user12;
++--------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table  | Create Table                                                                                                                                                                                                                                                                        |
++--------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user12 | CREATE TABLE `user12` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `card` char(18) NOT NULL,
+  `test` varchar(20) NOT NULL,
+  `test1` char(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 |
++--------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test12          |
+| test13          |
+| test14          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user10          |
+| user11          |
+| user12          |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+30 rows in set (0.00 sec)
+
+mysql> DROP TABLE user12;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test12          |
+| test13          |
+| test14          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user10          |
+| user11          |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
+| user9           |
++-----------------+
+29 rows in set (0.00 sec)
+
+mysql> DROP TABLE user12;
+ERROR 1051 (42S02): Unknown table 'maizi.user12'
+mysql> DROP TABLE IF EXISTS user12;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+------------------------------+
+| Level | Code | Message                      |
++-------+------+------------------------------+
+| Note  | 1051 | Unknown table 'maizi.user12' |
++-------+------+------------------------------+
+1 row in set (0.00 sec)
+
+mysql> DROP TABLE IF EXISTS user11,user10,user9;
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test12          |
+| test13          |
+| test14          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
+| user6           |
+| user7           |
+| user8           |
++-----------------+
+26 rows in set (0.00 sec)
+
+mysql> DROP TABLE IF EXISTS user123,user8,user7,user6;
+Query OK, 0 rows affected, 1 warning (0.39 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test12          |
+| test13          |
+| test14          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user            |
+| user1           |
+| user2           |
+| user3           |
+| user4           |
+| user5           |
++-----------------+
+23 rows in set (0.00 sec)
+
+mysql> EXIT

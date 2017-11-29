@@ -1,0 +1,597 @@
+mysql> SHOW ENGINES;
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+| FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |
+| MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         |
+| MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         |
+| BLACKHOLE          | YES     | /dev/null storage engine (anything you write to it disappears) | NO           | NO   | NO         |
+| CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         |
+| MEMORY             | YES     | Hash based, stored in memory, useful for temporary tables      | NO           | NO   | NO         |
+| ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |
+| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        |
+| PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         |
++--------------------+---------+----------------------------------------------------------------+--------------+------+------------+
+9 rows in set (0.05 sec)
+
+mysql> SHOW ENGINES\G;
+*************************** 1. row ***************************
+      Engine: FEDERATED
+     Support: NO
+     Comment: Federated MySQL storage engine
+Transactions: NULL
+          XA: NULL
+  Savepoints: NULL
+*************************** 2. row ***************************
+      Engine: MRG_MYISAM
+     Support: YES
+     Comment: Collection of identical MyISAM tables
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 3. row ***************************
+      Engine: MyISAM
+     Support: YES
+     Comment: MyISAM storage engine
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 4. row ***************************
+      Engine: BLACKHOLE
+     Support: YES
+     Comment: /dev/null storage engine (anything you write to it disappears)
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 5. row ***************************
+      Engine: CSV
+     Support: YES
+     Comment: CSV storage engine
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 6. row ***************************
+      Engine: MEMORY
+     Support: YES
+     Comment: Hash based, stored in memory, useful for temporary tables
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 7. row ***************************
+      Engine: ARCHIVE
+     Support: YES
+     Comment: Archive storage engine
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+*************************** 8. row ***************************
+      Engine: InnoDB
+     Support: DEFAULT
+     Comment: Supports transactions, row-level locking, and foreign keys
+Transactions: YES
+          XA: YES
+  Savepoints: YES
+*************************** 9. row ***************************
+      Engine: PERFORMANCE_SCHEMA
+     Support: YES
+     Comment: Performance Schema
+Transactions: NO
+          XA: NO
+  Savepoints: NO
+9 rows in set (0.00 sec)
+
+ERROR: 
+No query specified
+
+mysql> SHOW VARIABLES LIKE 'have%';
++----------------------+----------+
+| Variable_name        | Value    |
++----------------------+----------+
+| have_compress        | YES      |
+| have_crypt           | NO       |
+| have_dynamic_loading | YES      |
+| have_geometry        | YES      |
+| have_openssl         | DISABLED |
+| have_profiling       | YES      |
+| have_query_cache     | YES      |
+| have_rtree_keys      | YES      |
+| have_ssl             | DISABLED |
+| have_symlink         | YES      |
++----------------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> SHOW VARIABLES LIKE 'storage_engine';
++----------------+--------+
+| Variable_name  | Value  |
++----------------+--------+
+| storage_engine | InnoDB |
++----------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| abc                |
+| maizi1             |
+| maizi2             |
+| mysql              |
+| performance_schema |
+| test               |
+| test1              |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> DROP DATABASE abc;
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> DROP DATABASE maizi1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DROP DATABASE maizi2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DROP DATABASE test1;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2014-12-27 12:37:59 |
++---------------------+
+1 row in set (0.03 sec)
+
+mysql> # SELECT NOW();
+mysql> # SELECT NOW();
+mysql> # SELECT NOW();
+mysql> -- SELECT DATABASE();
+mysql> \s
+--------------
+
+Connection id:		7
+Current database:	
+Current user:		root@localhost
+SSL:			Not in use
+Using delimiter:	;
+Server version:		5.6.22-log MySQL Community Server (GPL)
+Protocol version:	10
+Connection:		localhost via TCP/IP
+Server characterset:	utf8
+Db     characterset:	utf8
+Client characterset:	utf8
+Conn.  characterset:	utf8
+TCP port:		3306
+Uptime:			3 hours 10 min 55 sec
+
+Threads: 1  Questions: 57  Slow queries: 0  Opens: 75  Flush tables: 1  Open tables: 66  Queries per second avg: 0.004
+--------------
+
+mysql> SET NAMES GBK;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> \s
+--------------
+
+Connection id:		7
+Current database:	
+Current user:		root@localhost
+SSL:			Not in use
+Using delimiter:	;
+Server version:		5.6.22-log MySQL Community Server (GPL)
+Protocol version:	10
+Connection:		localhost via TCP/IP
+Server characterset:	utf8
+Db     characterset:	utf8
+Client characterset:	gbk
+Conn.  characterset:	gbk
+TCP port:		3306
+Uptime:			3 hours 11 min 2 sec
+
+Threads: 1  Questions: 61  Slow queries: 0  Opens: 75  Flush tables: 1  Open tables: 66  Queries per second avg: 0.005
+--------------
+
+mysql> SELECT DATABASE();
++------------+
+| DATABASE() |
++------------+
+| NULL       |
++------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS `user`(
+    -> id SMALLINT,
+    -> username VARCHAR(20),
+    -> age TINYINT,
+    -> sex ENUM('�?,'�?,'保密'),
+    -> email VARCHAR(50),
+    -> addr VARCHAR(200),
+    -> birth YEAR,
+    -> salary FLOAT(8,2),
+    -> tel INT,
+    -> married TINYINT(1) COMMENT '0代表未结婚，�?代表已婚'
+    -> )ENGINE=INNODB CHARSET=UTF8;
+ERROR 1046 (3D000): No database selected
+mysql> # 注释内容
+mysql> -- 注释内容
+mysql> -- 创建maizi数据�?
+mysql> CREATE DATABASE IF NOT EXISTS `maizi` DEFAULT CHARACTER SET 'UTF8';
+Query OK, 1 row affected (0.02 sec)
+
+mysql> 
+mysql> USE `maizi`;
+Database changed
+mysql> 
+mysql> -- 创建学员�?user)
+mysql> -- 编号 id
+mysql> -- 用户�?username
+mysql> -- 年龄 age
+mysql> -- 性别 sex
+mysql> -- 邮箱 email
+mysql> -- 地址 addr
+mysql> -- 生日 birth
+mysql> -- 薪水 salary
+mysql> -- 电话 tel
+mysql> -- 是否结婚 married
+mysql> -- 注意：当需要输入中文的时候，需要临时转换客户端的编码方�?
+mysql> -- SET NAMES GBK;
+mysql> -- 字段注释 通过COMMENT 注释内容 给字段添加注�?
+mysql> CREATE TABLE IF NOT EXISTS `user`(
+    -> id SMALLINT,
+    -> username VARCHAR(20),
+    -> age TINYINT,
+    -> sex ENUM('�?,'�?,'保密'),
+    -> email VARCHAR(50),
+    -> addr VARCHAR(200),
+    -> birth YEAR,
+    -> salary FLOAT(8,2),
+    -> tel INT,
+    -> married TINYINT(1) COMMENT '0代表未结婚，�?代表已婚'
+    -> )ENGINE=INNODB CHARSET=UTF8;
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> 
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| user            |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS course(
+    -> cid TINYINT,
+    -> courseName VARCHAR(50),
+    -> courseDesc VARCHAR(200)
+    -> );
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| course          |
+| user            |
++-----------------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS cms_cate(
+    -> id TINYINT,
+    -> cateName VARCHAR(50),
+    -> cateDesc VARCHAR(200)
+    -> )ENGINE=MyISAM CHARSET=UTF8;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS cms_news(
+    -> id INT,
+    -> title VARCHAR(50),
+    -> content TEXT,
+    -> pubTime INT,
+    -> clickNum INT,
+    -> isTop TINYINT(1) COMMENT '0代表不置顶，1代表置顶'
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| user            |
++-----------------+
+4 rows in set (0.00 sec)
+
+mysql> DESC cms_news;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | YES  |     | NULL    |       |
+| title    | varchar(50) | YES  |     | NULL    |       |
+| content  | text        | YES  |     | NULL    |       |
+| pubTime  | int(11)     | YES  |     | NULL    |       |
+| clickNum | int(11)     | YES  |     | NULL    |       |
+| isTop    | tinyint(1)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.11 sec)
+
+mysql> DESCRIBE cms_news;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | YES  |     | NULL    |       |
+| title    | varchar(50) | YES  |     | NULL    |       |
+| content  | text        | YES  |     | NULL    |       |
+| pubTime  | int(11)     | YES  |     | NULL    |       |
+| clickNum | int(11)     | YES  |     | NULL    |       |
+| isTop    | tinyint(1)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> SHOW COLUMNS FROM cms_news;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | YES  |     | NULL    |       |
+| title    | varchar(50) | YES  |     | NULL    |       |
+| content  | text        | YES  |     | NULL    |       |
+| pubTime  | int(11)     | YES  |     | NULL    |       |
+| clickNum | int(11)     | YES  |     | NULL    |       |
+| isTop    | tinyint(1)  | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> CREATE TABLE test1(
+    -> num1 TINYINT,
+    -> num2 SMALLINT,
+    -> num3 MEDIUMINT,
+    -> num4 INT,
+    -> num5 BIGINT
+    -> );
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> DESC test1;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| num1  | tinyint(4)   | YES  |     | NULL    |       |
+| num2  | smallint(6)  | YES  |     | NULL    |       |
+| num3  | mediumint(9) | YES  |     | NULL    |       |
+| num4  | int(11)      | YES  |     | NULL    |       |
+| num5  | bigint(20)   | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> ? MEDIUMINT
+Name: 'MEDIUMINT'
+Description:
+MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]
+
+A medium-sized integer. The signed range is -8388608 to 8388607. The
+unsigned range is 0 to 16777215.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/numeric-type-overview.html
+
+
+mysql> ? INT
+Name: 'INT'
+Description:
+INT[(M)] [UNSIGNED] [ZEROFILL]
+
+A normal-size integer. The signed range is -2147483648 to 2147483647.
+The unsigned range is 0 to 4294967295.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/numeric-type-overview.html
+
+
+mysql> ? BIGINT
+Name: 'BIGINT'
+Description:
+BIGINT[(M)] [UNSIGNED] [ZEROFILL]
+
+A large integer. The signed range is -9223372036854775808 to
+9223372036854775807. The unsigned range is 0 to 18446744073709551615.
+
+SERIAL is an alias for BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/numeric-type-overview.html
+
+
+mysql> INSERT test1 VALUES(-128,-32768,-8388608,-2147483648,-9223372036854775808);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test1;
++------+--------+----------+-------------+----------------------+
+| num1 | num2   | num3     | num4        | num5                 |
++------+--------+----------+-------------+----------------------+
+| -128 | -32768 | -8388608 | -2147483648 | -9223372036854775808 |
++------+--------+----------+-------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test1 VALUES(-129,-32768,-8388608,-2147483648,-9223372036854775808);
+ERROR 1264 (22003): Out of range value for column 'num1' at row 1
+mysql> SELECT * FROM test1;
++------+--------+----------+-------------+----------------------+
+| num1 | num2   | num3     | num4        | num5                 |
++------+--------+----------+-------------+----------------------+
+| -128 | -32768 | -8388608 | -2147483648 | -9223372036854775808 |
++------+--------+----------+-------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE test2(
+    -> num1 TINYINT UNSIGNED,
+    -> num2 TINYINT 
+    -> );
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> DESC test2;
++-------+---------------------+------+-----+---------+-------+
+| Field | Type                | Null | Key | Default | Extra |
++-------+---------------------+------+-----+---------+-------+
+| num1  | tinyint(3) unsigned | YES  |     | NULL    |       |
+| num2  | tinyint(4)          | YES  |     | NULL    |       |
++-------+---------------------+------+-----+---------+-------+
+2 rows in set (0.03 sec)
+
+mysql> INSERT test2 VALUES(0,-12);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> SELECT * FROM test2;
++------+------+
+| num1 | num2 |
++------+------+
+|    0 |  -12 |
++------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test2 VALUES(-10,-12);
+ERROR 1264 (22003): Out of range value for column 'num1' at row 1
+mysql> CREATE TABLE test3(
+    -> num1 TINYINT ZEROFILL,
+    -> num2 SMALLINT ZEROFILL,
+    -> num3 MEDIUMINT ZEROFILL,
+    -> num4 INT ZEROFILL,
+    -> num5 BIGINT ZEROFILL
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> DESC test3;
++-------+--------------------------------+------+-----+---------+-------+
+| Field | Type                           | Null | Key | Default | Extra |
++-------+--------------------------------+------+-----+---------+-------+
+| num1  | tinyint(3) unsigned zerofill   | YES  |     | NULL    |       |
+| num2  | smallint(5) unsigned zerofill  | YES  |     | NULL    |       |
+| num3  | mediumint(8) unsigned zerofill | YES  |     | NULL    |       |
+| num4  | int(10) unsigned zerofill      | YES  |     | NULL    |       |
+| num5  | bigint(20) unsigned zerofill   | YES  |     | NULL    |       |
++-------+--------------------------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> INSERT test3 VALUES(1,1,1,1,1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test3;
++------+-------+----------+------------+----------------------+
+| num1 | num2  | num3     | num4       | num5                 |
++------+-------+----------+------------+----------------------+
+|  001 | 00001 | 00000001 | 0000000001 | 00000000000000000001 |
++------+-------+----------+------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test3 VALUES(123,1,1,1,1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test3;
++------+-------+----------+------------+----------------------+
+| num1 | num2  | num3     | num4       | num5                 |
++------+-------+----------+------------+----------------------+
+|  001 | 00001 | 00000001 | 0000000001 | 00000000000000000001 |
+|  123 | 00001 | 00000001 | 0000000001 | 00000000000000000001 |
++------+-------+----------+------------+----------------------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE test4(
+    -> num1 FLOAT(6,2),
+    -> num2 DOUBLE(6,2),
+    -> num2 DECIMAL(6,2)
+    -> );
+ERROR 1060 (42S21): Duplicate column name 'num2'
+mysql> CREATE TABLE test4(
+    -> num1 FLOAT(6,2),
+    -> num2 DOUBLE(6,2),
+    -> num3 DECIMAL(6,2)
+    -> );
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> DESC test4;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| num1  | float(6,2)   | YES  |     | NULL    |       |
+| num2  | double(6,2)  | YES  |     | NULL    |       |
+| num3  | decimal(6,2) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> INSERT test4 VALUES(3.1415,3.1415,3.1415);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> SHOW WARNINGS;
++-------+------+-------------------------------------------+
+| Level | Code | Message                                   |
++-------+------+-------------------------------------------+
+| Note  | 1265 | Data truncated for column 'num3' at row 1 |
++-------+------+-------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM test4;
++------+------+------+
+| num1 | num2 | num3 |
++------+------+------+
+| 3.14 | 3.14 | 3.14 |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test4 VALUES(3.2495,3.2495,3.2495);
+Query OK, 1 row affected, 1 warning (0.04 sec)
+
+mysql> SELECT * FROM test4;
++------+------+------+
+| num1 | num2 | num3 |
++------+------+------+
+| 3.14 | 3.14 | 3.14 |
+| 3.25 | 3.25 | 3.25 |
++------+------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM test4 WHERE num1=3.14;
++------+------+------+
+| num1 | num2 | num3 |
++------+------+------+
+| 3.14 | 3.14 | 3.14 |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM test4 WHERE num2=3.14;
++------+------+------+
+| num1 | num2 | num3 |
++------+------+------+
+| 3.14 | 3.14 | 3.14 |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM test4 WHERE num3=3.14;
++------+------+------+
+| num1 | num2 | num3 |
++------+------+------+
+| 3.14 | 3.14 | 3.14 |
++------+------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM test4 WHERE num1='3.14';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM test4 WHERE num3='3.14';
++------+------+------+
+| num1 | num2 | num3 |
++------+------+------+
+| 3.14 | 3.14 | 3.14 |
++------+------+------+
+1 row in set (0.00 sec)
+

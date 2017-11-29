@@ -1,0 +1,52 @@
+mysql> help tinyint
+Name: 'TINYINT'
+Description:
+TINYINT[(M)] [UNSIGNED] [ZEROFILL]
+
+A very small integer. The signed range is -128 to 127. The unsigned
+range is 0 to 255.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/numeric-type-overview.html
+
+
+mysql> help CREATE DATABASE
+Name: 'CREATE DATABASE'
+Description:
+Syntax:
+CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
+    [create_specification] ...
+
+create_specification:
+    [DEFAULT] CHARACTER SET [=] charset_name
+  | [DEFAULT] COLLATE [=] collation_name
+
+CREATE DATABASE creates a database with the given name. To use this
+statement, you need the CREATE privilege for the database. CREATE
+SCHEMA is a synonym for CREATE DATABASE.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/create-database.html
+
+
+mysql> ? INT
+Name: 'INT'
+Description:
+INT[(M)] [UNSIGNED] [ZEROFILL]
+
+A normal-size integer. The signed range is -2147483648 to 2147483647.
+The unsigned range is 0 to 4294967295.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/numeric-type-overview.html
+
+
+mysql> \h INT
+Name: 'INT'
+Description:
+INT[(M)] [UNSIGNED] [ZEROFILL]
+
+A normal-size integer. The signed range is -2147483648 to 2147483647.
+The unsigned range is 0 to 4294967295.
+
+URL: http://dev.mysql.com/doc/refman/5.6/en/numeric-type-overview.html
+
+
+mysql> \q

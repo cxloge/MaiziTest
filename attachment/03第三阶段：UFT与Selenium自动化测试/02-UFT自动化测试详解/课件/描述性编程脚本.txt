@@ -1,0 +1,37 @@
+'变量定义
+Dim flyfromcity,flytocity
+Dim rndcitynumber,flyfromcount
+Dim flytocount
+Dim fligtlistcount
+Dim wrb,rndwrb,rndwrbs
+Dim wrbcount
+'登录部分
+Dialog("Login").WinEdit("Agent Name:").Set "mercury"
+Dialog("Login").WinEdit("Password:").Set "mercury"
+Dialog("Login").WinButton("OK").Click
+'订票部分
+Window("Flight Reservation").ActiveX("MaskEdBox").Type "121215"
+flyfromcount=window("Flight Reservation").WinComboBox("Fly From:").GetItemsCount
+rndcitynumber=randomnumber.Value(0,flyfromcount-1)
+'msgbox rndcitynumber
+Window("Flight Reservation").WinComboBox("Fly From:").Select  rndcitynumber'"Frankfurt"
+flytocount=window("Flight Reservation").WinComboBox("Fly To:").GetItemsCount
+rndcitynumber=randomnumber.Value(0,flytocount-1)
+Window("Flight Reservation").WinComboBox("Fly To:").Select rndcitynumber
+Window("Flight Reservation").WinButton("FLIGHT").Click
+fligthlistcount=window("Flight Reservation").Dialog("Flights Table").WinList("From").GetItemsCount
+rndcitynumber=randomnumber.Value(0,fligthlistcount-1)
+Window("Flight Reservation").Dialog("Flights Table").WinList("From").Select rndcitynumber ' "13552   FRA   08:00 AM   LON   08:45 AM   SR     $164.50"
+window("Flight Reservation").Dialog("Flights Table").dialog("text:=OK").Click
+Window("Flight Reservation").WinEdit("Name:").Set "test"
+Set wrb=description.Create
+wrb("Class Name").value="WinRadioButton"
+Set rndwrbs=window("Flight Reservation").ChildObjects(wrb)
+wrbcount=rndwrbs.count
+msgbox wrbcount
+rndwrb=randomnumber.Value(0,wrbcount-1)
+rndwrbs(rndwrb).set
+'Window("Flight Reservation").WinRadioButton("Business").Set
+Window("Flight Reservation").WinButton("Insert Order").Click
+'退出系统
+Window("Flight Reservation").Close

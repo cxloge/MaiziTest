@@ -1,0 +1,209 @@
+﻿mysql> USE maizi;
+Database changed
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test2           |
+| test3           |
+| test4           |
+| user            |
++-----------------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS test5(
+    -> str1 CHAR(5),
+    -> str2 VARCHAR(5)
+    -> );
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> INSERT test5 VALUES('1','1');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> 
+mysql> SELECT * FROM test5;
++------+------+
+| str1 | str2 |
++------+------+
+| 1    | 1    |
++------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test5 VALUES('12345','12345');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM test5;
++-------+-------+
+| str1  | str2  |
++-------+-------+
+| 1     | 1     |
+| 12345 | 12345 |
++-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT test5 VALUES('123456','123456');
+ERROR 1406 (22001): Data too long for column 'str1' at row 1
+mysql> INSERT test5 VALUES('','');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT test5 VALUES('1  ','1  ');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT test5 VALUES('123456','123456');
+ERROR 1406 (22001): Data too long for column 'str1' at row 1
+mysql> SELECT * FROM test5;
++-------+-------+
+| str1  | str2  |
++-------+-------+
+| 1     | 1     |
+| 12345 | 12345 |
+|       |       |
+| 1     | 1     |
++-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(str1,'-'),CONCAT(str2,'-') FROM test5;
++------------------+------------------+
+| CONCAT(str1,'-') | CONCAT(str2,'-') |
++------------------+------------------+
+| 1-               | 1-               |
+| 12345-           | 12345-           |
+| -                | -                |
+| 1-               | 1  -             |
++------------------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT test5 VALUES('  a','  a');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT CONCAT('-',str1),CONCAT('-',str2) FROM test5;
++------------------+------------------+
+| CONCAT('-',str1) | CONCAT('-',str2) |
++------------------+------------------+
+| -1               | -1               |
+| -12345           | -12345           |
+| -                | -                |
+| -1               | -1               |
+| -  a             | -  a             |
++------------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> \s
+--------------
+
+Connection id:		11
+Current database:	maizi
+Current user:		root@localhost
+SSL:			Not in use
+Using delimiter:	;
+Server version:		5.6.22-log MySQL Community Server (GPL)
+Protocol version:	10
+Connection:		localhost via TCP/IP
+Server characterset:	utf8
+Db     characterset:	utf8
+Client characterset:	utf8
+Conn.  characterset:	utf8
+TCP port:		3306
+Uptime:			6 hours 49 min 26 sec
+
+Threads: 1  Questions: 221  Slow queries: 0  Opens: 103  Flush tables: 1  Open tables: 79  Queries per second avg: 0.008
+--------------
+
+mysql> INSERT test5 VALUES('啊','啊');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test5;
++-------+-------+
+| str1  | str2  |
++-------+-------+
+| 1     | 1     |
+| 12345 | 12345 |
+|       |       |
+| 1     | 1     |
+|   a   |   a   |
+| 啊    | 啊    |
++-------+-------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT LENGTH('啊');
++---------------+
+| LENGTH('啊')  |
++---------------+
+|             3 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CHAR_LENGTH('啊');
++--------------------+
+| CHAR_LENGTH('啊')  |
++--------------------+
+|                  1 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT test5 VALUES('啊啊啊啊啊','麦子学院好');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM test5;
++-----------------+-----------------+
+| str1            | str2            |
++-----------------+-----------------+
+| 1               | 1               |
+| 12345           | 12345           |
+|                 |                 |
+| 1               | 1               |
+|   a             |   a             |
+| 啊              | 啊              |
+| 啊啊啊啊啊      | 麦子学院好      |
++-----------------+-----------------+
+7 rows in set (0.00 sec)
+
+mysql> \s
+--------------
+
+Connection id:		11
+Current database:	maizi
+Current user:		root@localhost
+SSL:			Not in use
+Using delimiter:	;
+Server version:		5.6.22-log MySQL Community Server (GPL)
+Protocol version:	10
+Connection:		localhost via TCP/IP
+Server characterset:	utf8
+Db     characterset:	utf8
+Client characterset:	utf8
+Conn.  characterset:	utf8
+TCP port:		3306
+Uptime:			6 hours 51 min 2 sec
+
+Threads: 1  Questions: 230  Slow queries: 0  Opens: 103  Flush tables: 1  Open tables: 79  Queries per second avg: 0.009
+--------------
+
+mysql> CREATE TABLE test6(
+    -> str1 TEXT
+    -> );
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> DESC test6;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| str1  | text | YES  |     | NULL    |       |
++-------+------+------+-----+---------+-------+
+1 row in set (0.02 sec)
+
+mysql> INSERT test6 VALUES('skdfjlksdfjlksjdflkj塑料口袋精灵是看见对方离开首都基辅绿卡时间的联发科技');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM test6;
++----------------------------------------------------------------------------------------------------+
+| str1                                                                                               |
++----------------------------------------------------------------------------------------------------+
+| skdfjlksdfjlksjdflkj塑料口袋精灵是看见对方离开首都基辅绿卡时间的联发科技                           |
++----------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+

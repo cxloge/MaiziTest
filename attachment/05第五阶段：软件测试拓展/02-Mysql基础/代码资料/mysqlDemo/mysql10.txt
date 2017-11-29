@@ -1,0 +1,633 @@
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   44 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |   12 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   56 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   88 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |   12 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   32 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   65 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE cms_user SET age=age-3 WHERE username LIKE '____';
+Query OK, 7 rows affected (0.18 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   11 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   21 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   33 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   53 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   29 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   62 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE cms_user SET age=age+10 LIMIT 3;
+Query OK, 3 rows affected (0.04 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   53 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   29 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   62 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> UPDATE cms_user SET age=age+10 LIMIT 0,3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '3' at line 1
+mysql> UPDATE cms_user SET age=age+10 ORDER BY id DESC LIMIT 3;
+Query OK, 2 rows affected (0.06 sec)
+Rows matched: 3  Changed: 2  Warnings: 0
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  7 | king      | king         | user@qq.com | 1419817708 | user.jpg |     5 |   53 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+12 rows in set (0.00 sec)
+
+mysql> DELETE FROM cms_user WHERE sex='男' ORDER BY age DESC LIMIT 1;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT id,username,proId FROM cms_user;
++----+-----------+-------+
+| id | username  | proId |
++----+-----------+-------+
+|  1 | 张三      |     1 |
+|  2 | 张三丰    |     2 |
+|  3 | 章子怡    |     3 |
+|  4 | long      |     4 |
+|  5 | ring      |     2 |
+|  6 | queen     |     3 |
+|  8 | blek      |     1 |
+|  9 | rose      |     2 |
+| 10 | lily      |     2 |
+| 11 | john      |     2 |
+| 12 | test1     |     1 |
++----+-----------+-------+
+11 rows in set (0.00 sec)
+
+mysql> DESC provinces;
++---------+---------------------+------+-----+---------+----------------+
+| Field   | Type                | Null | Key | Default | Extra          |
++---------+---------------------+------+-----+---------+----------------+
+| id      | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| proName | varchar(10)         | NO   | UNI | NULL    |                |
++---------+---------------------+------+-----+---------+----------------+
+2 rows in set (0.07 sec)
+
+mysql> SELECT id,username,proName FROM cms_user,provinces;
+ERROR 1052 (23000): Column 'id' in field list is ambiguous
+mysql> SELECT cms_user.id,username,proName FROM cms_user,provinces;
++----+-----------+---------+
+| id | username  | proName |
++----+-----------+---------+
+|  8 | blek      | 上海    |
+|  8 | blek      | 北京    |
+|  8 | blek      | 广州    |
+|  8 | blek      | 深圳    |
+|  8 | blek      | 重庆    |
+| 11 | john      | 上海    |
+| 11 | john      | 北京    |
+| 11 | john      | 广州    |
+| 11 | john      | 深圳    |
+| 11 | john      | 重庆    |
+| 10 | lily      | 上海    |
+| 10 | lily      | 北京    |
+| 10 | lily      | 广州    |
+| 10 | lily      | 深圳    |
+| 10 | lily      | 重庆    |
+|  4 | long      | 上海    |
+|  4 | long      | 北京    |
+|  4 | long      | 广州    |
+|  4 | long      | 深圳    |
+|  4 | long      | 重庆    |
+|  6 | queen     | 上海    |
+|  6 | queen     | 北京    |
+|  6 | queen     | 广州    |
+|  6 | queen     | 深圳    |
+|  6 | queen     | 重庆    |
+|  5 | ring      | 上海    |
+|  5 | ring      | 北京    |
+|  5 | ring      | 广州    |
+|  5 | ring      | 深圳    |
+|  5 | ring      | 重庆    |
+|  9 | rose      | 上海    |
+|  9 | rose      | 北京    |
+|  9 | rose      | 广州    |
+|  9 | rose      | 深圳    |
+|  9 | rose      | 重庆    |
+| 12 | test1     | 上海    |
+| 12 | test1     | 北京    |
+| 12 | test1     | 广州    |
+| 12 | test1     | 深圳    |
+| 12 | test1     | 重庆    |
+|  1 | 张三      | 上海    |
+|  1 | 张三      | 北京    |
+|  1 | 张三      | 广州    |
+|  1 | 张三      | 深圳    |
+|  1 | 张三      | 重庆    |
+|  2 | 张三丰    | 上海    |
+|  2 | 张三丰    | 北京    |
+|  2 | 张三丰    | 广州    |
+|  2 | 张三丰    | 深圳    |
+|  2 | 张三丰    | 重庆    |
+|  3 | 章子怡    | 上海    |
+|  3 | 章子怡    | 北京    |
+|  3 | 章子怡    | 广州    |
+|  3 | 章子怡    | 深圳    |
+|  3 | 章子怡    | 重庆    |
++----+-----------+---------+
+55 rows in set (0.03 sec)
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT * FROM provinces;
++----+---------+
+| id | proName |
++----+---------+
+|  2 | 上海    |
+|  1 | 北京    |
+|  4 | 广州    |
+|  3 | 深圳    |
+|  5 | 重庆    |
++----+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT cms_user.id,username,proName FROM cms_user,provinces
+    -> 
+    -> WHERE cms_user.proId=provinces.id;
++----+-----------+---------+
+| id | username  | proName |
++----+-----------+---------+
+|  1 | 张三      | 北京    |
+|  2 | 张三丰    | 上海    |
+|  3 | 章子怡    | 深圳    |
+|  4 | long      | 广州    |
+|  5 | ring      | 上海    |
+|  6 | queen     | 深圳    |
+|  8 | blek      | 北京    |
+|  9 | rose      | 上海    |
+| 10 | lily      | 上海    |
+| 11 | john      | 上海    |
+| 12 | test1     | 北京    |
++----+-----------+---------+
+11 rows in set (0.04 sec)
+
+mysql> SELECT u.id,u.username,u.email,u.sex,p.proName
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> INNER JOIN provinces AS p
+    -> 
+    -> ON u.proId=p.id;
++----+-----------+-------------+--------+---------+
+| id | username  | email       | sex    | proName |
++----+-----------+-------------+--------+---------+
+|  1 | 张三      | user@qq.com | 男     | 北京    |
+|  2 | 张三丰    | user@qq.com | 女     | 上海    |
+|  3 | 章子怡    | user@qq.com | 男     | 深圳    |
+|  4 | long      | user@qq.com | 女     | 广州    |
+|  5 | ring      | user@qq.com | 男     | 上海    |
+|  6 | queen     | user@qq.com | 女     | 深圳    |
+|  8 | blek      | user@qq.com | 女     | 北京    |
+|  9 | rose      | user@qq.com | 男     | 上海    |
+| 10 | lily      | user@qq.com | 女     | 上海    |
+| 11 | john      | user@qq.com | 保密   | 上海    |
+| 12 | test1     | user@qq.com | 保密   | 北京    |
++----+-----------+-------------+--------+---------+
+11 rows in set (0.02 sec)
+
+mysql> SELECT u.id,u.username,u.email,u.sex,p.proName
+    -> 
+    -> FROM provinces AS p
+    -> 
+    -> CROSS JOIN cms_user AS u
+    -> 
+    -> ON u.proId=p.id;
++----+-----------+-------------+--------+---------+
+| id | username  | email       | sex    | proName |
++----+-----------+-------------+--------+---------+
+|  1 | 张三      | user@qq.com | 男     | 北京    |
+|  2 | 张三丰    | user@qq.com | 女     | 上海    |
+|  3 | 章子怡    | user@qq.com | 男     | 深圳    |
+|  4 | long      | user@qq.com | 女     | 广州    |
+|  5 | ring      | user@qq.com | 男     | 上海    |
+|  6 | queen     | user@qq.com | 女     | 深圳    |
+|  8 | blek      | user@qq.com | 女     | 北京    |
+|  9 | rose      | user@qq.com | 男     | 上海    |
+| 10 | lily      | user@qq.com | 女     | 上海    |
+| 11 | john      | user@qq.com | 保密   | 上海    |
+| 12 | test1     | user@qq.com | 保密   | 北京    |
++----+-----------+-------------+--------+---------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT u.id,u.username,u.email,u.sex,p.proName
+    -> 
+    -> FROM provinces AS p
+    -> 
+    -> JOIN cms_user AS u
+    -> 
+    -> ON u.proId=p.id;
++----+-----------+-------------+--------+---------+
+| id | username  | email       | sex    | proName |
++----+-----------+-------------+--------+---------+
+|  1 | 张三      | user@qq.com | 男     | 北京    |
+|  2 | 张三丰    | user@qq.com | 女     | 上海    |
+|  3 | 章子怡    | user@qq.com | 男     | 深圳    |
+|  4 | long      | user@qq.com | 女     | 广州    |
+|  5 | ring      | user@qq.com | 男     | 上海    |
+|  6 | queen     | user@qq.com | 女     | 深圳    |
+|  8 | blek      | user@qq.com | 女     | 北京    |
+|  9 | rose      | user@qq.com | 男     | 上海    |
+| 10 | lily      | user@qq.com | 女     | 上海    |
+| 11 | john      | user@qq.com | 保密   | 上海    |
+| 12 | test1     | user@qq.com | 保密   | 北京    |
++----+-----------+-------------+--------+---------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT u.id,u.username,u.sex,p.proName 
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男';
++----+-----------+------+---------+
+| id | username  | sex  | proName |
++----+-----------+------+---------+
+|  1 | 张三      | 男   | 北京    |
+|  3 | 章子怡    | 男   | 深圳    |
+|  5 | ring      | 男   | 上海    |
+|  9 | rose      | 男   | 上海    |
++----+-----------+------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT u.id,u.username,u.sex,p.proName,COUNT(*) AS totalUsers
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男'
+    -> 
+    -> GROUP BY p.proName;
++----+-----------+------+---------+------------+
+| id | username  | sex  | proName | totalUsers |
++----+-----------+------+---------+------------+
+|  5 | ring      | 男   | 上海    |          2 |
+|  1 | 张三      | 男   | 北京    |          1 |
+|  3 | 章子怡    | 男   | 深圳    |          1 |
++----+-----------+------+---------+------------+
+3 rows in set (0.07 sec)
+
+mysql> SELECT u.id,u.username,u.sex,p.proName,COUNT(*) AS totalUsers,GROUP_CONCAT(username)
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男'
+    -> 
+    -> GROUP BY p.proName;
++----+-----------+------+---------+------------+------------------------+
+| id | username  | sex  | proName | totalUsers | GROUP_CONCAT(username) |
++----+-----------+------+---------+------------+------------------------+
+|  9 | rose      | 男   | 上海    |          2 | rose,ring              |
+|  1 | 张三      | 男   | 北京    |          1 | 张三                   |
+|  3 | 章子怡    | 男   | 深圳    |          1 | 章子怡                 |
++----+-----------+------+---------+------------+------------------------+
+3 rows in set (0.03 sec)
+
+mysql> SELECT u.id,u.username,u.sex,p.proName,COUNT(*) AS totalUsers,GROUP_CONCAT(username)
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男'
+    -> 
+    -> GROUP BY p.proName
+    -> 
+    -> HAVING COUNT(*)>=1;
++----+-----------+------+---------+------------+------------------------+
+| id | username  | sex  | proName | totalUsers | GROUP_CONCAT(username) |
++----+-----------+------+---------+------------+------------------------+
+|  5 | ring      | 男   | 上海    |          2 | ring,rose              |
+|  1 | 张三      | 男   | 北京    |          1 | 张三                   |
+|  3 | 章子怡    | 男   | 深圳    |          1 | 章子怡                 |
++----+-----------+------+---------+------------+------------------------+
+3 rows in set (0.04 sec)
+
+mysql> SELECT u.id,u.username,u.sex,p.proName,COUNT(*) AS totalUsers,GROUP_CONCAT(username)
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男'
+    -> 
+    -> GROUP BY p.proName
+    -> 
+    -> HAVING COUNT(*)>=1
+    -> 
+    -> ORDER BY id　ASC;
+ERROR 1054 (42S22): Unknown column 'id　ASC' in 'order clause'
+mysql> SELECT u.id,u.username,u.sex,p.proName,COUNT(*) AS totalUsers,GROUP_CONCAT(username)
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男'
+    -> 
+    -> GROUP BY p.proName
+    -> 
+    -> HAVING COUNT(*)>=1
+    -> 
+    -> ORDER BY u.id　ASC;
+ERROR 1054 (42S22): Unknown column 'u.id　ASC' in 'order clause'
+mysql> SELECT u.id,u.username,u.sex,p.proName,COUNT(*) AS totalUsers,GROUP_CONCAT(username)
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男'
+    -> 
+    -> GROUP BY p.proName
+    -> 
+    -> HAVING COUNT(*)>=1
+    -> 
+    -> ORDER BY u.id ASC;
++----+-----------+------+---------+------------+------------------------+
+| id | username  | sex  | proName | totalUsers | GROUP_CONCAT(username) |
++----+-----------+------+---------+------------+------------------------+
+|  1 | 张三      | 男   | 北京    |          1 | 张三                   |
+|  3 | 章子怡    | 男   | 深圳    |          1 | 章子怡                 |
+|  5 | ring      | 男   | 上海    |          2 | ring,rose              |
++----+-----------+------+---------+------------+------------------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT u.id,u.username,u.sex,p.proName,COUNT(*) AS totalUsers,GROUP_CONCAT(username)
+    -> 
+    -> FROM cms_user AS u
+    -> 
+    -> JOIN
+    -> 
+    -> provinces AS p
+    -> 
+    -> ON u.proId=p.id
+    -> 
+    -> WHERE u.sex='男'
+    -> 
+    -> GROUP BY p.proName
+    -> 
+    -> HAVING COUNT(*)>=1
+    -> 
+    -> ORDER BY u.id ASC
+    -> 
+    -> LIMIT 0,2;
++----+-----------+------+---------+------------+------------------------+
+| id | username  | sex  | proName | totalUsers | GROUP_CONCAT(username) |
++----+-----------+------+---------+------------+------------------------+
+|  1 | 张三      | 男   | 北京    |          1 | 张三                   |
+|  3 | 章子怡    | 男   | 深圳    |          1 | 章子怡                 |
++----+-----------+------+---------+------------+------------------------+
+2 rows in set (0.01 sec)
+
+mysql> DESC cms_news;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | int(10) unsigned    | NO   | PRI | NULL    | auto_increment |
+| title    | varchar(50)         | NO   | UNI | NULL    |                |
+| content  | text                | YES  |     | NULL    |                |
+| clickNum | int(10) unsigned    | YES  |     | 0       |                |
+| pubTime  | int(10) unsigned    | YES  |     | NULL    |                |
+| cId      | tinyint(3) unsigned | NO   |     | NULL    |                |
+| aId      | tinyint(3) unsigned | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+7 rows in set (0.01 sec)
+
+mysql> DESC cms_cate;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL    | auto_increment |
+| cateName | varchar(50)         | NO   | UNI | NULL    |                |
+| cateDesc | varchar(200)        | NO   |     |         |                |
++----------+---------------------+------+-----+---------+----------------+
+3 rows in set (0.11 sec)
+
+mysql> SELECT n.id,n.title,c.cateName FROM 
+    -> 
+    -> cms_news AS n
+    -> 
+    -> JOIN 
+    -> 
+    -> cms_cate AS c
+    -> 
+    -> ON n.cId=c.id;
++----+-------------------------------------------------------------+--------------+
+| id | title                                                       | cateName     |
++----+-------------------------------------------------------------+--------------+
+|  1 | 亚航客机失联搜救尚无线索 未发求救信号                       | 国内新闻     |
+|  2 | 北京新开通四条地铁线路 迎接首位客人                         | 国际新闻     |
+|  3 | 考研政治题多次出现习近平讲话内容                            | 体育新闻     |
+|  4 | 深度-曾雪麟：佩兰别重蹈卡马乔覆辙                           | 国际新闻     |
+|  5 | 国产JAD-1手枪枪架投入使用 手枪可变"冲锋枪"                  | 军事新闻     |
+|  6 | 麦子学院荣获新浪教育大奖                                    | 国内新闻     |
+|  7 | 麦子学院荣获腾讯教育大奖                                    | 国内新闻     |
+|  8 | 麦子学院新课上线                                            | 国内新闻     |
++----+-------------------------------------------------------------+--------------+
+8 rows in set (0.02 sec)
+
+mysql> SELECT * FROM cms_news;
++----+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+------------+-----+-----+
+| id | title                                                       | content                                                                                                                                                                                                                                                                                                                                                                                                                     | clickNum | pubTime    | cId | aId |
++----+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+------------+-----+-----+
+|  1 | 亚航客机失联搜救尚无线索 未发求救信号                       | 马来西亚亚洲航空公司一架搭载155名乘客的客机28日早晨从印度尼西亚飞往新加坡途中与空中交通控制塔台失去联系，下落不明。                                                                                                                                                                                                                                                                                                         |        0 | 1419818808 |   1 |   2 |
+|  2 | 北京新开通四条地铁线路 迎接首位客人                         | 12月28日凌晨，随着北京地铁6号线二期、7号线、15号线西段、14号线东段的开通试运营，北京的轨道交通运营里程将再添62公里，共计达到527公里。当日凌晨5时许，北京地铁7号线瓷器口换乘站迎来新线开通的第一位乘客。                                                                                                                                                                                                                     |        0 | 1419818108 |   2 |   1 |
+|  3 | 考研政治题多次出现习近平讲话内容                            | 新京报讯 （记者许路阳 (微博)）APEC反腐宣言、国家公祭日、依法治国……昨日，全国硕士研究生招生考试进行首日初试，其中，思想政治理论考题多次提及时事热点，并且多次出现习近平在不同场合的讲话内容。                                                                                                                                                                                                                                |        0 | 1419818208 |   3 |   2 |
+|  4 | 深度-曾雪麟：佩兰别重蹈卡马乔覆辙                           | 12月25日是前国足主帅曾雪麟的85岁大寿，恰逢圣诞节，患有尿毒症老爷子带着圣诞帽度过了自己的生日。此前，腾讯记者曾专访曾雪麟，尽管已经退休多年，但老爷子仍旧关心着中国足球，为国足揪心，对于国足近几位的教练，他只欣赏高洪波。对即将征战亚洲杯的国足，老爷子希望佩兰不要重蹈卡马乔的覆辙                                                                                                                                        |        0 | 1419818308 |   2 |   4 |
+|  5 | 国产JAD-1手枪枪架投入使用 手枪可变"冲锋枪"                  | 日前，JAD-1型多功能手枪枪架通过公安部特种警用装备质量监督检验中心检验，正式投入生产使用。此款多功能枪架由京安盾(北京)警用装备有限公司开发研制，期间经广东省江门市公安特警支队试用，获得好评。                                                                                                                                                                                                                               |        0 | 1419818408 |   4 |   4 |
+|  6 | 麦子学院荣获新浪教育大奖                                    | 麦子学院最大的职业IT教育平台，获奖了                                                                                                                                                                                                                                                                                                                                                                                        |        0 | 1419818508 |   1 |   5 |
+|  7 | 麦子学院荣获腾讯教育大奖                                    | 麦子学院最大的职业IT教育平台，获奖了                                                                                                                                                                                                                                                                                                                                                                                        |        0 | 1419818608 |   1 |   5 |
+|  8 | 麦子学院新课上线                                            | 麦子学院PHP课程马上上线了，小伙伴快来报名学习哈                                                                                                                                                                                                                                                                                                                                                                             |        0 | 1419818708 |   1 |   5 |
++----+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+------------+-----+-----+
+8 rows in set (0.00 sec)
+
+mysql> SELECT n.id,n.title,a.username,a.role
+    -> 
+    -> FROM 
+    -> 
+    -> cms_news AS n
+    -> 
+    -> JOIN
+    -> 
+    -> cms_admin AS a
+    -> 
+    -> ON n.aId=a.id;
++----+-------------------------------------------------------------+----------+-----------------+
+| id | title                                                       | username | role            |
++----+-------------------------------------------------------------+----------+-----------------+
+|  2 | 北京新开通四条地铁线路 迎接首位客人                         | admin    | 超级管理员      |
+|  1 | 亚航客机失联搜救尚无线索 未发求救信号                       | king     | 普通管理员      |
+|  3 | 考研政治题多次出现习近平讲话内容                            | king     | 普通管理员      |
+|  4 | 深度-曾雪麟：佩兰别重蹈卡马乔覆辙                           | queen    | 普通管理员      |
+|  5 | 国产JAD-1手枪枪架投入使用 手枪可变"冲锋枪"                  | queen    | 普通管理员      |
+|  6 | 麦子学院荣获新浪教育大奖                                    | test     | 普通管理员      |
+|  7 | 麦子学院荣获腾讯教育大奖                                    | test     | 普通管理员      |
+|  8 | 麦子学院新课上线                                            | test     | 普通管理员      |
++----+-------------------------------------------------------------+----------+-----------------+
+8 rows in set (0.12 sec)
+
+mysql> DESC cms_news;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | int(10) unsigned    | NO   | PRI | NULL    | auto_increment |
+| title    | varchar(50)         | NO   | UNI | NULL    |                |
+| content  | text                | YES  |     | NULL    |                |
+| clickNum | int(10) unsigned    | YES  |     | 0       |                |
+| pubTime  | int(10) unsigned    | YES  |     | NULL    |                |
+| cId      | tinyint(3) unsigned | NO   |     | NULL    |                |
+| aId      | tinyint(3) unsigned | NO   |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT n.id,n.title,c.cateName,a.username,a.role
+    -> 
+    -> FROM cms_cate AS c
+    -> 
+    -> JOIN 
+    -> 
+    -> cms_news AS n
+    -> 
+    -> ON n.cId=c.id
+    -> 
+    -> JOIN 
+    -> 
+    -> cms_admin AS a
+    -> 
+    -> ON n.aId=a.id;
++----+-------------------------------------------------------------+--------------+----------+-----------------+
+| id | title                                                       | cateName     | username | role            |
++----+-------------------------------------------------------------+--------------+----------+-----------------+
+|  2 | 北京新开通四条地铁线路 迎接首位客人                         | 国际新闻     | admin    | 超级管理员      |
+|  1 | 亚航客机失联搜救尚无线索 未发求救信号                       | 国内新闻     | king     | 普通管理员      |
+|  3 | 考研政治题多次出现习近平讲话内容                            | 体育新闻     | king     | 普通管理员      |
+|  4 | 深度-曾雪麟：佩兰别重蹈卡马乔覆辙                           | 国际新闻     | queen    | 普通管理员      |
+|  5 | 国产JAD-1手枪枪架投入使用 手枪可变"冲锋枪"                  | 军事新闻     | queen    | 普通管理员      |
+|  6 | 麦子学院荣获新浪教育大奖                                    | 国内新闻     | test     | 普通管理员      |
+|  7 | 麦子学院荣获腾讯教育大奖                                    | 国内新闻     | test     | 普通管理员      |
+|  8 | 麦子学院新课上线                                            | 国内新闻     | test     | 普通管理员      |
++----+-------------------------------------------------------------+--------------+----------+-----------------+
+8 rows in set (0.00 sec)
+
+mysql> \t

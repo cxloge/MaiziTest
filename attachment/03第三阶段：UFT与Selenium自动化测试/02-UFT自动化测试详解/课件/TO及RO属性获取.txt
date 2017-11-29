@@ -1,0 +1,24 @@
+1、检测被测对象启动后是否位于屏幕中间：x=518，y=279
+2、检测被测对象标题栏是否为Login text=Login
+
+Option explicit
+Dim x,y,apptitle
+wait 5
+'获取应用程序x坐标
+x=dialog("Login").GetROProperty("abs_x")
+'获取应用程序y坐标
+y=dialog("Login").GetROProperty("abs_y")
+'获取应用程序标题名称
+apptitle=dialog("Login").GetROProperty("text")
+'判断x与y坐标是否正确
+If x=518 and y=279 Then
+	msgbox "应用程序位于屏幕中间"
+else
+	msgbox "应用程序显示位置错误"
+End If
+'判断标题显示是否正确
+If apptitle="Login" Then
+	msgbox "应用程序标题显示正确"
+else
+	msgbox "应用程序标题显示错误"
+End If

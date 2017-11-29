@@ -1,0 +1,532 @@
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test12          |
+| test13          |
+| test14          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| user1           |
+| user2           |
+| user3           |
++-----------------+
+20 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS user(
+    -> id TINYINT UNSIGNED AUTO_INCREMENT KEY,
+    -> username VARCHAR(20) NOT NULL UNIQUE,
+    -> password CHAR(32) NOT NULL,
+    -> email VARCHAR(50) NOT NULL DEFAULT '382771946@qq.com',
+    -> age TINYINT UNSIGNED DEFAULT 18
+    -> );
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> DESC user;
++----------+---------------------+------+-----+------------------+----------------+
+| Field    | Type                | Null | Key | Default          | Extra          |
++----------+---------------------+------+-----+------------------+----------------+
+| id       | tinyint(3) unsigned | NO   | PRI | NULL             | auto_increment |
+| username | varchar(20)         | NO   | UNI | NULL             |                |
+| password | char(32)            | NO   |     | NULL             |                |
+| email    | varchar(50)         | NO   |     | 382771946@qq.com |                |
+| age      | tinyint(3) unsigned | YES  |     | 18               |                |
++----------+---------------------+------+-----+------------------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> INSERT INTO user VALUES(1,'KING','KING','KING@QQ.COM',20);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+-------------+------+
+| id | username | password | email       | age  |
++----+----------+----------+-------------+------+
+|  1 | KING     | KING     | KING@QQ.COM |   20 |
++----+----------+----------+-------------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT user VALUE(2,'QUEEN','QUEEN','QUEEN@QQ.COM',30);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+--------------+------+
+| id | username | password | email        | age  |
++----+----------+----------+--------------+------+
+|  1 | KING     | KING     | KING@QQ.COM  |   20 |
+|  2 | QUEEN    | QUEEN    | QUEEN@QQ.COM |   30 |
++----+----------+----------+--------------+------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT user(username,password) VALUES('A','AAA');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> 
+mysql> INSERT user(password,username) VALUES('BBB','B');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+------------------+------+
+| id | username | password | email            | age  |
++----+----------+----------+------------------+------+
+|  1 | KING     | KING     | KING@QQ.COM      |   20 |
+|  2 | QUEEN    | QUEEN    | QUEEN@QQ.COM     |   30 |
+|  3 | A        | AAA      | 382771946@qq.com |   18 |
+|  4 | B        | BBB      | 382771946@qq.com |   18 |
++----+----------+----------+------------------+------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT user(username,id,password,email,age) VALUES('C',55,'CCC','CCC@QQ.COM',DEFAULT);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+------------------+------+
+| id | username | password | email            | age  |
++----+----------+----------+------------------+------+
+|  1 | KING     | KING     | KING@QQ.COM      |   20 |
+|  2 | QUEEN    | QUEEN    | QUEEN@QQ.COM     |   30 |
+|  3 | A        | AAA      | 382771946@qq.com |   18 |
+|  4 | B        | BBB      | 382771946@qq.com |   18 |
+| 55 | C        | CCC      | CCC@QQ.COM       |   18 |
++----+----------+----------+------------------+------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT user VALUES(6,'D','DDD','D@QQ.COM',35),
+    -> (8,'E','EEE','E@QQ.COM',9),
+    -> (18,'F','FFF','F@QQ.COM',32);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM user;
++----+----------+----------+------------------+------+
+| id | username | password | email            | age  |
++----+----------+----------+------------------+------+
+|  1 | KING     | KING     | KING@QQ.COM      |   20 |
+|  2 | QUEEN    | QUEEN    | QUEEN@QQ.COM     |   30 |
+|  3 | A        | AAA      | 382771946@qq.com |   18 |
+|  4 | B        | BBB      | 382771946@qq.com |   18 |
+|  6 | D        | DDD      | D@QQ.COM         |   35 |
+|  8 | E        | EEE      | E@QQ.COM         |    9 |
+| 18 | F        | FFF      | F@QQ.COM         |   32 |
+| 55 | C        | CCC      | CCC@QQ.COM       |   18 |
++----+----------+----------+------------------+------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO user SET id=98,username='test',password='this is a test',email='123@qq.com',
+    -> age=48;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------------+------------------+------+
+| id | username | password       | email            | age  |
++----+----------+----------------+------------------+------+
+|  1 | KING     | KING           | KING@QQ.COM      |   20 |
+|  2 | QUEEN    | QUEEN          | QUEEN@QQ.COM     |   30 |
+|  3 | A        | AAA            | 382771946@qq.com |   18 |
+|  4 | B        | BBB            | 382771946@qq.com |   18 |
+|  6 | D        | DDD            | D@QQ.COM         |   35 |
+|  8 | E        | EEE            | E@QQ.COM         |    9 |
+| 18 | F        | FFF            | F@QQ.COM         |   32 |
+| 55 | C        | CCC            | CCC@QQ.COM       |   18 |
+| 98 | test     | this is a test | 123@qq.com       |   48 |
++----+----------+----------------+------------------+------+
+9 rows in set (0.00 sec)
+
+mysql> INSERT user SET username='maizi',password='maizixueyuan' ;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------------+------------------+------+
+| id | username | password       | email            | age  |
++----+----------+----------------+------------------+------+
+|  1 | KING     | KING           | KING@QQ.COM      |   20 |
+|  2 | QUEEN    | QUEEN          | QUEEN@QQ.COM     |   30 |
+|  3 | A        | AAA            | 382771946@qq.com |   18 |
+|  4 | B        | BBB            | 382771946@qq.com |   18 |
+|  6 | D        | DDD            | D@QQ.COM         |   35 |
+|  8 | E        | EEE            | E@QQ.COM         |    9 |
+| 18 | F        | FFF            | F@QQ.COM         |   32 |
+| 55 | C        | CCC            | CCC@QQ.COM       |   18 |
+| 98 | test     | this is a test | 123@qq.com       |   48 |
+| 99 | maizi    | maizixueyuan   | 382771946@qq.com |   18 |
++----+----------+----------------+------------------+------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE IF NOT EXISTS testUser(
+    -> id TINYINT UNSIGNED AUTO_INCREMENT KEY,
+    -> username VARCHAR(20) NOT NULL UNIQUE
+    -> );
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> INSERT testUser SELECT id,username FROM user;
+Query OK, 10 rows affected (0.04 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM testUser;
++----+----------+
+| id | username |
++----+----------+
+|  3 | A        |
+|  4 | B        |
+| 55 | C        |
+|  6 | D        |
+|  8 | E        |
+| 18 | F        |
+|  1 | KING     |
+| 99 | maizi    |
+|  2 | QUEEN    |
+| 98 | test     |
++----+----------+
+10 rows in set (0.00 sec)
+
+mysql> INSERT testUser SELECT * FROM user;
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> TRUNCATE testUser;
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> INSERT testUser(username) SELECT username FROM user;
+Query OK, 10 rows affected (0.03 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM testUser;
++----+----------+
+| id | username |
++----+----------+
+|  1 | A        |
+|  2 | B        |
+|  3 | C        |
+|  4 | D        |
+|  5 | E        |
+|  6 | F        |
+|  7 | KING     |
+|  8 | maizi    |
+|  9 | QUEEN    |
+| 10 | test     |
++----+----------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------------+------------------+------+
+| id | username | password       | email            | age  |
++----+----------+----------------+------------------+------+
+|  1 | KING     | KING           | KING@QQ.COM      |   20 |
+|  2 | QUEEN    | QUEEN          | QUEEN@QQ.COM     |   30 |
+|  3 | A        | AAA            | 382771946@qq.com |   18 |
+|  4 | B        | BBB            | 382771946@qq.com |   18 |
+|  6 | D        | DDD            | D@QQ.COM         |   35 |
+|  8 | E        | EEE            | E@QQ.COM         |    9 |
+| 18 | F        | FFF            | F@QQ.COM         |   32 |
+| 55 | C        | CCC            | CCC@QQ.COM       |   18 |
+| 98 | test     | this is a test | 123@qq.com       |   48 |
+| 99 | maizi    | maizixueyuan   | 382771946@qq.com |   18 |
++----+----------+----------------+------------------+------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE user SET age=5;
+Query OK, 10 rows affected (0.06 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> SELECT * FROM user;
++----+----------+----------------+------------------+------+
+| id | username | password       | email            | age  |
++----+----------+----------------+------------------+------+
+|  1 | KING     | KING           | KING@QQ.COM      |    5 |
+|  2 | QUEEN    | QUEEN          | QUEEN@QQ.COM     |    5 |
+|  3 | A        | AAA            | 382771946@qq.com |    5 |
+|  4 | B        | BBB            | 382771946@qq.com |    5 |
+|  6 | D        | DDD            | D@QQ.COM         |    5 |
+|  8 | E        | EEE            | E@QQ.COM         |    5 |
+| 18 | F        | FFF            | F@QQ.COM         |    5 |
+| 55 | C        | CCC            | CCC@QQ.COM       |    5 |
+| 98 | test     | this is a test | 123@qq.com       |    5 |
+| 99 | maizi    | maizixueyuan   | 382771946@qq.com |    5 |
++----+----------+----------------+------------------+------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE user SET age=20,email='test@qq.com';
+Query OK, 10 rows affected (0.03 sec)
+Rows matched: 10  Changed: 10  Warnings: 0
+
+mysql> SELECT * FROM user;
++----+----------+----------------+-------------+------+
+| id | username | password       | email       | age  |
++----+----------+----------------+-------------+------+
+|  1 | KING     | KING           | test@qq.com |   20 |
+|  2 | QUEEN    | QUEEN          | test@qq.com |   20 |
+|  3 | A        | AAA            | test@qq.com |   20 |
+|  4 | B        | BBB            | test@qq.com |   20 |
+|  6 | D        | DDD            | test@qq.com |   20 |
+|  8 | E        | EEE            | test@qq.com |   20 |
+| 18 | F        | FFF            | test@qq.com |   20 |
+| 55 | C        | CCC            | test@qq.com |   20 |
+| 98 | test     | this is a test | test@qq.com |   20 |
+| 99 | maizi    | maizixueyuan   | test@qq.com |   20 |
++----+----------+----------------+-------------+------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE user SET password='king123',email='123@qq.com',age=99
+    -> WHERE id=1;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM user;
++----+----------+----------------+-------------+------+
+| id | username | password       | email       | age  |
++----+----------+----------------+-------------+------+
+|  1 | KING     | king123        | 123@qq.com  |   99 |
+|  2 | QUEEN    | QUEEN          | test@qq.com |   20 |
+|  3 | A        | AAA            | test@qq.com |   20 |
+|  4 | B        | BBB            | test@qq.com |   20 |
+|  6 | D        | DDD            | test@qq.com |   20 |
+|  8 | E        | EEE            | test@qq.com |   20 |
+| 18 | F        | FFF            | test@qq.com |   20 |
+| 55 | C        | CCC            | test@qq.com |   20 |
+| 98 | test     | this is a test | test@qq.com |   20 |
+| 99 | maizi    | maizixueyuan   | test@qq.com |   20 |
++----+----------+----------------+-------------+------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE user SET age=age-5 WHERE id>=3;
+Query OK, 8 rows affected (0.08 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+mysql> SELECT * FROM user;
++----+----------+----------------+-------------+------+
+| id | username | password       | email       | age  |
++----+----------+----------------+-------------+------+
+|  1 | KING     | king123        | 123@qq.com  |   99 |
+|  2 | QUEEN    | QUEEN          | test@qq.com |   20 |
+|  3 | A        | AAA            | test@qq.com |   15 |
+|  4 | B        | BBB            | test@qq.com |   15 |
+|  6 | D        | DDD            | test@qq.com |   15 |
+|  8 | E        | EEE            | test@qq.com |   15 |
+| 18 | F        | FFF            | test@qq.com |   15 |
+| 55 | C        | CCC            | test@qq.com |   15 |
+| 98 | test     | this is a test | test@qq.com |   15 |
+| 99 | maizi    | maizixueyuan   | test@qq.com |   15 |
++----+----------+----------------+-------------+------+
+10 rows in set (0.00 sec)
+
+mysql> UPDATE user SET age=DEFAULT WHERE username='A';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM user;
++----+----------+----------------+-------------+------+
+| id | username | password       | email       | age  |
++----+----------+----------------+-------------+------+
+|  1 | KING     | king123        | 123@qq.com  |   99 |
+|  2 | QUEEN    | QUEEN          | test@qq.com |   20 |
+|  3 | A        | AAA            | test@qq.com |   18 |
+|  4 | B        | BBB            | test@qq.com |   15 |
+|  6 | D        | DDD            | test@qq.com |   15 |
+|  8 | E        | EEE            | test@qq.com |   15 |
+| 18 | F        | FFF            | test@qq.com |   15 |
+| 55 | C        | CCC            | test@qq.com |   15 |
+| 98 | test     | this is a test | test@qq.com |   15 |
+| 99 | maizi    | maizixueyuan   | test@qq.com |   15 |
++----+----------+----------------+-------------+------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM testUser;
++----+----------+
+| id | username |
++----+----------+
+|  1 | A        |
+|  2 | B        |
+|  3 | C        |
+|  4 | D        |
+|  5 | E        |
+|  6 | F        |
+|  7 | KING     |
+|  8 | maizi    |
+|  9 | QUEEN    |
+| 10 | test     |
++----+----------+
+10 rows in set (0.00 sec)
+
+mysql> DELETE FROM testUser ;
+Query OK, 10 rows affected (0.07 sec)
+
+mysql> SELECT * FROM testUser;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------------+-------------+------+
+| id | username | password       | email       | age  |
++----+----------+----------------+-------------+------+
+|  1 | KING     | king123        | 123@qq.com  |   99 |
+|  2 | QUEEN    | QUEEN          | test@qq.com |   20 |
+|  3 | A        | AAA            | test@qq.com |   18 |
+|  4 | B        | BBB            | test@qq.com |   15 |
+|  6 | D        | DDD            | test@qq.com |   15 |
+|  8 | E        | EEE            | test@qq.com |   15 |
+| 18 | F        | FFF            | test@qq.com |   15 |
+| 55 | C        | CCC            | test@qq.com |   15 |
+| 98 | test     | this is a test | test@qq.com |   15 |
+| 99 | maizi    | maizixueyuan   | test@qq.com |   15 |
++----+----------+----------------+-------------+------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------------+-------------+------+
+| id | username | password       | email       | age  |
++----+----------+----------------+-------------+------+
+|  1 | KING     | king123        | 123@qq.com  |   99 |
+|  2 | QUEEN    | QUEEN          | test@qq.com |   20 |
+|  3 | A        | AAA            | test@qq.com |   18 |
+|  4 | B        | BBB            | test@qq.com |   15 |
+|  6 | D        | DDD            | test@qq.com |   15 |
+|  8 | E        | EEE            | test@qq.com |   15 |
+| 18 | F        | FFF            | test@qq.com |   15 |
+| 55 | C        | CCC            | test@qq.com |   15 |
+| 98 | test     | this is a test | test@qq.com |   15 |
+| 99 | maizi    | maizixueyuan   | test@qq.com |   15 |
++----+----------+----------------+-------------+------+
+10 rows in set (0.00 sec)
+
+mysql> DELETE FROM testUser WHERE id=1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM user WHERE id=1;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------------+-------------+------+
+| id | username | password       | email       | age  |
++----+----------+----------------+-------------+------+
+|  2 | QUEEN    | QUEEN          | test@qq.com |   20 |
+|  3 | A        | AAA            | test@qq.com |   18 |
+|  4 | B        | BBB            | test@qq.com |   15 |
+|  6 | D        | DDD            | test@qq.com |   15 |
+|  8 | E        | EEE            | test@qq.com |   15 |
+| 18 | F        | FFF            | test@qq.com |   15 |
+| 55 | C        | CCC            | test@qq.com |   15 |
+| 98 | test     | this is a test | test@qq.com |   15 |
+| 99 | maizi    | maizixueyuan   | test@qq.com |   15 |
++----+----------+----------------+-------------+------+
+9 rows in set (0.00 sec)
+
+mysql> DELETE FROM user;
+Query OK, 9 rows affected (0.04 sec)
+
+mysql> SELECT * FROM user;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO user VALUES(1,'KING','KING','KING@QQ.COM',20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+-------------+------+
+| id | username | password | email       | age  |
++----+----------+----------+-------------+------+
+|  1 | KING     | KING     | KING@QQ.COM |   20 |
++----+----------+----------+-------------+------+
+1 row in set (0.00 sec)
+
+mysql> DELETE FROM user;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> SELECT * FROM user;
+Empty set (0.00 sec)
+
+mysql> 
+mysql> INSERT user(username,password) VALUES('A','AAA');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user;
++-----+----------+----------+------------------+------+
+| id  | username | password | email            | age  |
++-----+----------+----------+------------------+------+
+| 100 | A        | AAA      | 382771946@qq.com |   18 |
++-----+----------+----------+------------------+------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE user;
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                                                                                                                                         |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| user  | CREATE TABLE `user` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `password` char(32) NOT NULL,
+  `email` varchar(50) NOT NULL DEFAULT '382771946@qq.com',
+  `age` tinyint(3) unsigned DEFAULT '18',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 |
++-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE user AUTO_INCREMENT=1;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT user(username,password) VALUES('A','AAA');
+ERROR 1062 (23000): Duplicate entry 'A' for key 'username'
+mysql> DELETE FROM user;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> ALTER TABLE user AUTO_INCREMENT=1;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT user(username,password) VALUES('A','AAA');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+------------------+------+
+| id | username | password | email            | age  |
++----+----------+----------+------------------+------+
+|  1 | A        | AAA      | 382771946@qq.com |   18 |
++----+----------+----------+------------------+------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> INSERT INTO user VALUES(1,'KING','KING','KING@QQ.COM',20);
+ERROR 1062 (23000): Duplicate entry '1' for key 'PRIMARY'
+mysql> 
+mysql> INSERT user VALUE(2,'QUEEN','QUEEN','QUEEN@QQ.COM',30);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+------------------+------+
+| id | username | password | email            | age  |
++----+----------+----------+------------------+------+
+|  1 | A        | AAA      | 382771946@qq.com |   18 |
+|  2 | QUEEN    | QUEEN    | QUEEN@QQ.COM     |   30 |
++----+----------+----------+------------------+------+
+2 rows in set (0.00 sec)
+
+mysql> TRUNCATE TABLE user;
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> SELECT * FROM user;
+Empty set (0.00 sec)
+
+mysql> INSERT user(username,password) VALUES('A','AAA');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> SELECT * FROM user;
++----+----------+----------+------------------+------+
+| id | username | password | email            | age  |
++----+----------+----------+------------------+------+
+|  1 | A        | AAA      | 382771946@qq.com |   18 |
++----+----------+----------+------------------+------+
+1 row in set (0.00 sec)
+
+mysql> TRUNCATE user;
+Query OK, 0 rows affected (0.29 sec)
+
+mysql> \t

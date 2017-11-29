@@ -1,0 +1,1868 @@
+﻿mysql> SELECT 1+1;
++-----+
+| 1+1 |
++-----+
+|   2 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> SELECT 1+1,1-1,2*4,3/8;
++-----+-----+-----+--------+
+| 1+1 | 1-1 | 2*4 | 3/8    |
++-----+-----+-----+--------+
+|   2 |   0 |   8 | 0.3750 |
++-----+-----+-----+--------+
+1 row in set (0.09 sec)
+
+mysql> SELECT 1+'3MAIZI';
++------------+
+| 1+'3MAIZI' |
++------------+
+|          4 |
++------------+
+1 row in set, 1 warning (0.03 sec)
+
+mysql> SHOW WARNING;S
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WARNING' at line 1
+    -> SHOW WARNINGS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S
+SHOW WARNINGS' at line 1
+mysql> SHOW WARNINGS;
++-------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                                           |
++-------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Error | 1064 | You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'S
+SHOW WARNINGS' at line 1 |
++-------+------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT 1+'3MAIZI';
++------------+
+| 1+'3MAIZI' |
++------------+
+|          4 |
++------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> SHOW WARNINGS;
++---------+------+--------------------------------------------+
+| Level   | Code | Message                                    |
++---------+------+--------------------------------------------+
+| Warning | 1292 | Truncated incorrect DOUBLE value: '3MAIZI' |
++---------+------+--------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 3/0;
++------+
+| 3/0  |
++------+
+| NULL |
++------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 4 DIV 2;
++---------+
+| 4 DIV 2 |
++---------+
+|       2 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 3%8;
++------+
+| 3%8  |
++------+
+|    3 |
++------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 3 MOD 8;
++---------+
+| 3 MOD 8 |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 1+NULL;
++--------+
+| 1+NULL |
++--------+
+|   NULL |
++--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT NULL+NULL;
++-----------+
+| NULL+NULL |
++-----------+
+|      NULL |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 1=1;
++-----+
+| 1=1 |
++-----+
+|   1 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> SELECT 1=1,1='1';
++-----+-------+
+| 1=1 | 1='1' |
++-----+-------+
+|   1 |     1 |
++-----+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 1=1,1='1',1=2;
++-----+-------+-----+
+| 1=1 | 1='1' | 1=2 |
++-----+-------+-----+
+|   1 |     1 |   0 |
++-----+-------+-----+
+1 row in set (0.00 sec)
+
+mysql> SELECT username,username='king' FROM student;
++----------+-----------------+
+| username | username='king' |
++----------+-----------------+
+| king     |               1 |
+| king1    |               0 |
+| king2    |               0 |
+| king3    |               0 |
+| king4    |               0 |
+| king5    |               0 |
+| king6    |               0 |
+| king7    |               0 |
+| king8    |               0 |
++----------+-----------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT username,username!='king' FROM student;
++----------+------------------+
+| username | username!='king' |
++----------+------------------+
+| king     |                0 |
+| king1    |                1 |
+| king2    |                1 |
+| king3    |                1 |
+| king4    |                1 |
+| king5    |                1 |
+| king6    |                1 |
+| king7    |                1 |
+| king8    |                1 |
++----------+------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+| 13 | TEST2     | TEST2        | user@qq.com | 1381203974 | user.jpg |    20 |   18 | NULL   |
+| 14 | lll       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+| 15 | ttt       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+| 16 | ooo       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,age,sex,age=null FROM cms_user;
++----+-----------+------+--------+----------+
+| id | username  | age  | sex    | age=null |
++----+-----------+------+--------+----------+
+|  1 | 张三      |   21 | 男     |     NULL |
+|  2 | 张三丰    |   31 | 女     |     NULL |
+|  3 | 章子怡    |   43 | 男     |     NULL |
+|  4 | long      |   41 | 女     |     NULL |
+|  5 | ring      |    9 | 男     |     NULL |
+|  6 | queen     |   77 | 女     |     NULL |
+|  8 | blek      |   85 | 女     |     NULL |
+|  9 | rose      |    9 | 男     |     NULL |
+| 10 | lily      |   39 | 女     |     NULL |
+| 11 | john      |   72 | 保密   |     NULL |
+| 12 | test1     | NULL | 保密   |     NULL |
+| 13 | TEST2     |   18 | NULL   |     NULL |
+| 14 | lll       |   18 | NULL   |     NULL |
+| 15 | ttt       |   18 | NULL   |     NULL |
+| 16 | ooo       |   18 | NULL   |     NULL |
++----+-----------+------+--------+----------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,age,sex,age<=>null FROM cms_user;
++----+-----------+------+--------+------------+
+| id | username  | age  | sex    | age<=>null |
++----+-----------+------+--------+------------+
+|  1 | 张三      |   21 | 男     |          0 |
+|  2 | 张三丰    |   31 | 女     |          0 |
+|  3 | 章子怡    |   43 | 男     |          0 |
+|  4 | long      |   41 | 女     |          0 |
+|  5 | ring      |    9 | 男     |          0 |
+|  6 | queen     |   77 | 女     |          0 |
+|  8 | blek      |   85 | 女     |          0 |
+|  9 | rose      |    9 | 男     |          0 |
+| 10 | lily      |   39 | 女     |          0 |
+| 11 | john      |   72 | 保密   |          0 |
+| 12 | test1     | NULL | 保密   |          1 |
+| 13 | TEST2     |   18 | NULL   |          0 |
+| 14 | lll       |   18 | NULL   |          0 |
+| 15 | ttt       |   18 | NULL   |          0 |
+| 16 | ooo       |   18 | NULL   |          0 |
++----+-----------+------+--------+------------+
+15 rows in set (0.03 sec)
+
+mysql> SELECT id,username,age,sex,sex<=>NULL FROM cms_user;
++----+-----------+------+--------+------------+
+| id | username  | age  | sex    | sex<=>NULL |
++----+-----------+------+--------+------------+
+|  1 | 张三      |   21 | 男     |          0 |
+|  2 | 张三丰    |   31 | 女     |          0 |
+|  3 | 章子怡    |   43 | 男     |          0 |
+|  4 | long      |   41 | 女     |          0 |
+|  5 | ring      |    9 | 男     |          0 |
+|  6 | queen     |   77 | 女     |          0 |
+|  8 | blek      |   85 | 女     |          0 |
+|  9 | rose      |    9 | 男     |          0 |
+| 10 | lily      |   39 | 女     |          0 |
+| 11 | john      |   72 | 保密   |          0 |
+| 12 | test1     | NULL | 保密   |          0 |
+| 13 | TEST2     |   18 | NULL   |          1 |
+| 14 | lll       |   18 | NULL   |          1 |
+| 15 | ttt       |   18 | NULL   |          1 |
+| 16 | ooo       |   18 | NULL   |          1 |
++----+-----------+------+--------+------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,score,score>=70 FROM student;
++----+----------+-------+-----------+
+| id | username | score | score>=70 |
++----+----------+-------+-----------+
+|  1 | king     |    95 |         1 |
+|  2 | king1    |    35 |         0 |
+|  3 | king2    |    45 |         0 |
+|  4 | king3    |    55 |         0 |
+|  5 | king4    |    65 |         0 |
+|  6 | king5    |    75 |         1 |
+|  7 | king6    |    80 |         1 |
+|  8 | king7    |    90 |         1 |
+|  9 | king8    |    25 |         0 |
++----+----------+-------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT id,username,age,age IS NULL FROM cms_user;
++----+-----------+------+-------------+
+| id | username  | age  | age IS NULL |
++----+-----------+------+-------------+
+|  1 | 张三      |   21 |           0 |
+|  2 | 张三丰    |   31 |           0 |
+|  3 | 章子怡    |   43 |           0 |
+|  4 | long      |   41 |           0 |
+|  5 | ring      |    9 |           0 |
+|  6 | queen     |   77 |           0 |
+|  8 | blek      |   85 |           0 |
+|  9 | rose      |    9 |           0 |
+| 10 | lily      |   39 |           0 |
+| 11 | john      |   72 |           0 |
+| 12 | test1     | NULL |           1 |
+| 13 | TEST2     |   18 |           0 |
+| 14 | lll       |   18 |           0 |
+| 15 | ttt       |   18 |           0 |
+| 16 | ooo       |   18 |           0 |
++----+-----------+------+-------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,age,age IS NOT NULL FROM cms_user;
++----+-----------+------+-----------------+
+| id | username  | age  | age IS NOT NULL |
++----+-----------+------+-----------------+
+|  1 | 张三      |   21 |               1 |
+|  2 | 张三丰    |   31 |               1 |
+|  3 | 章子怡    |   43 |               1 |
+|  4 | long      |   41 |               1 |
+|  5 | ring      |    9 |               1 |
+|  6 | queen     |   77 |               1 |
+|  8 | blek      |   85 |               1 |
+|  9 | rose      |    9 |               1 |
+| 10 | lily      |   39 |               1 |
+| 11 | john      |   72 |               1 |
+| 12 | test1     | NULL |               0 |
+| 13 | TEST2     |   18 |               1 |
+| 14 | lll       |   18 |               1 |
+| 15 | ttt       |   18 |               1 |
+| 16 | ooo       |   18 |               1 |
++----+-----------+------+-----------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,age,age BETWEEN 10 AND 30 FROM cms_user;
++----+-----------+------+-----------------------+
+| id | username  | age  | age BETWEEN 10 AND 30 |
++----+-----------+------+-----------------------+
+|  1 | 张三      |   21 |                     1 |
+|  2 | 张三丰    |   31 |                     0 |
+|  3 | 章子怡    |   43 |                     0 |
+|  4 | long      |   41 |                     0 |
+|  5 | ring      |    9 |                     0 |
+|  6 | queen     |   77 |                     0 |
+|  8 | blek      |   85 |                     0 |
+|  9 | rose      |    9 |                     0 |
+| 10 | lily      |   39 |                     0 |
+| 11 | john      |   72 |                     0 |
+| 12 | test1     | NULL |                  NULL |
+| 13 | TEST2     |   18 |                     1 |
+| 14 | lll       |   18 |                     1 |
+| 15 | ttt       |   18 |                     1 |
+| 16 | ooo       |   18 |                     1 |
++----+-----------+------+-----------------------+
+15 rows in set (0.02 sec)
+
+mysql> SELECT id,username,age,age IN(21,31,41,51) FROM cms_user;
++----+-----------+------+---------------------+
+| id | username  | age  | age IN(21,31,41,51) |
++----+-----------+------+---------------------+
+|  1 | 张三      |   21 |                   1 |
+|  2 | 张三丰    |   31 |                   1 |
+|  3 | 章子怡    |   43 |                   0 |
+|  4 | long      |   41 |                   1 |
+|  5 | ring      |    9 |                   0 |
+|  6 | queen     |   77 |                   0 |
+|  8 | blek      |   85 |                   0 |
+|  9 | rose      |    9 |                   0 |
+| 10 | lily      |   39 |                   0 |
+| 11 | john      |   72 |                   0 |
+| 12 | test1     | NULL |                NULL |
+| 13 | TEST2     |   18 |                   0 |
+| 14 | lll       |   18 |                   0 |
+| 15 | ttt       |   18 |                   0 |
+| 16 | ooo       |   18 |                   0 |
++----+-----------+------+---------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT 1 IN (1,2,3);
++--------------+
+| 1 IN (1,2,3) |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 11 IN (1,2,3);
++---------------+
+| 11 IN (1,2,3) |
++---------------+
+|             0 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT s LIKE '_';
+ERROR 1054 (42S22): Unknown column 's' in 'field list'
+mysql> SELECT 's' LIKE '_';
++--------------+
+| 's' LIKE '_' |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 'sD' LIKE '_';
++---------------+
+| 'sD' LIKE '_' |
++---------------+
+|             0 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT id,username,username LIKE '____' FROM cms_user;
++----+-----------+----------------------+
+| id | username  | username LIKE '____' |
++----+-----------+----------------------+
+|  8 | blek      |                    1 |
+| 11 | john      |                    1 |
+| 10 | lily      |                    1 |
+| 14 | lll       |                    0 |
+|  4 | long      |                    1 |
+| 16 | ooo       |                    0 |
+|  6 | queen     |                    0 |
+|  5 | ring      |                    1 |
+|  9 | rose      |                    1 |
+| 12 | test1     |                    0 |
+| 13 | TEST2     |                    0 |
+| 15 | ttt       |                    0 |
+|  1 | 张三      |                    0 |
+|  2 | 张三丰    |                    0 |
+|  3 | 章子怡    |                    0 |
++----+-----------+----------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,username REGEXP '^t' FROM cms_user;
++----+-----------+----------------------+
+| id | username  | username REGEXP '^t' |
++----+-----------+----------------------+
+|  8 | blek      |                    0 |
+| 11 | john      |                    0 |
+| 10 | lily      |                    0 |
+| 14 | lll       |                    0 |
+|  4 | long      |                    0 |
+| 16 | ooo       |                    0 |
+|  6 | queen     |                    0 |
+|  5 | ring      |                    0 |
+|  9 | rose      |                    0 |
+| 12 | test1     |                    1 |
+| 13 | TEST2     |                    1 |
+| 15 | ttt       |                    1 |
+|  1 | 张三      |                    0 |
+|  2 | 张三丰    |                    0 |
+|  3 | 章子怡    |                    0 |
++----+-----------+----------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT 2&&2;
++------+
+| 2&&2 |
++------+
+|    1 |
++------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 2&&2,2&&0;
++------+------+
+| 2&&2 | 2&&0 |
++------+------+
+|    1 |    0 |
++------+------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 2&&2,2&&0,2&&NULL,1||1,1||0,1||NULL,0||NULL;
++------+------+---------+------+------+---------+---------+
+| 2&&2 | 2&&0 | 2&&NULL | 1||1 | 1||0 | 1||NULL | 0||NULL |
++------+------+---------+------+------+---------+---------+
+|    1 |    0 |    NULL |    1 |    1 |       1 |    NULL |
++------+------+---------+------+------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT NULL&&1;
++---------+
+| NULL&&1 |
++---------+
+|    NULL |
++---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT !1,!0,!NULL;
++----+----+-------+
+| !1 | !0 | !NULL |
++----+----+-------+
+|  0 |  1 |  NULL |
++----+----+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT 1XOR0,0XOR1,1XOR1,0XOR0;
+ERROR 1054 (42S22): Unknown column '1XOR0' in 'field list'
+mysql> SELECT 1 XOR 0,0 XOR 1 ,1 XOR 1,0 XOR 0;
++---------+---------+---------+---------+
+| 1 XOR 0 | 0 XOR 1 | 1 XOR 1 | 0 XOR 0 |
++---------+---------+---------+---------+
+|       1 |       1 |       0 |       0 |
++---------+---------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CEIL(1.2),CELING(1.2);
+ERROR 1305 (42000): FUNCTION cms.CELING does not exist
+mysql> SELECT CEIL(1.2),CELLING(1.2);
+ERROR 1305 (42000): FUNCTION cms.CELLING does not exist
+mysql> SELECT CEIL(1.2),CEILING(1.2);
++-----------+--------------+
+| CEIL(1.2) | CEILING(1.2) |
++-----------+--------------+
+|         2 |            2 |
++-----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_cms |
++---------------+
+| cms_admin     |
+| cms_cate      |
+| cms_news      |
+| cms_user      |
+| department    |
+| employee      |
+| provinces     |
+| scholarship   |
+| student       |
+| test1         |
+| test2         |
+| test3         |
++---------------+
+12 rows in set (0.07 sec)
+
+mysql> SELECT VERSION();
++------------+
+| VERSION()  |
++------------+
+| 5.6.22-log |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2015-01-03 15:37:54 |
++---------------------+
+1 row in set (0.06 sec)
+
+mysql> SELECT CEIL(1.2),CEILING(1.2);
++-----------+--------------+
+| CEIL(1.2) | CEILING(1.2) |
++-----------+--------------+
+|         2 |            2 |
++-----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+| 13 | TEST2     | TEST2        | user@qq.com | 1381203974 | user.jpg |    20 |   18 | NULL   |
+| 14 | lll       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+| 15 | ttt       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+| 16 | ooo       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+15 rows in set (0.00 sec)
+
+mysql> USE maizi;
+Database changed
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_maizi |
++-----------------+
+| cms_cate        |
+| cms_news        |
+| course          |
+| test1           |
+| test10          |
+| test11          |
+| test12          |
+| test13          |
+| test14          |
+| test2           |
+| test3           |
+| test4           |
+| test5           |
+| test6           |
+| test7           |
+| test8           |
+| test9           |
+| testuser        |
+| user            |
+| user1           |
+| user2           |
+| user3           |
++-----------------+
+22 rows in set (0.00 sec)
+
+mysql> select * from user;
+Empty set (0.10 sec)
+
+mysql> select * from user1;
++----+----------+
+| id | username |
++----+----------+
+|  1 | king     |
+| 13 | QUEEN    |
++----+----------+
+2 rows in set (0.08 sec)
+
+mysql> select * from user2;
++----+----------+------+
+| id | username | card |
++----+----------+------+
+|  1 | king     | 111  |
+|  1 | queen    | 112  |
++----+----------+------+
+2 rows in set (0.07 sec)
+
+mysql> SELECT *FROM test2;
++------+------+
+| num1 | num2 |
++------+------+
+|    0 |  -12 |
++------+------+
+1 row in set (0.07 sec)
+
+mysql> SELECT *FROM test3;
++------+-------+----------+------------+----------------------+
+| num1 | num2  | num3     | num4       | num5                 |
++------+-------+----------+------------+----------------------+
+|  001 | 00001 | 00000001 | 0000000001 | 00000000000000000001 |
+|  123 | 00001 | 00000001 | 0000000001 | 00000000000000000001 |
++------+-------+----------+------------+----------------------+
+2 rows in set (0.06 sec)
+
+mysql> SELECT *FROM test4;
++------+------+------+
+| num1 | num2 | num3 |
++------+------+------+
+| 3.14 | 3.14 | 3.14 |
+| 3.25 | 3.25 | 3.25 |
++------+------+------+
+2 rows in set (0.07 sec)
+
+mysql> SELECT num1,CEIL(num2),CEILING(num3) FROM test4;
++------+------------+---------------+
+| num1 | CEIL(num2) | CEILING(num3) |
++------+------------+---------------+
+| 3.14 |          4 |             4 |
+| 3.25 |          4 |             4 |
++------+------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT FLOOR(3.14);
++-------------+
+| FLOOR(3.14) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MOD(3,8);
++----------+
+| MOD(3,8) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT POW(2,3),POWER(3,3);
++----------+------------+
+| POW(2,3) | POWER(3,3) |
++----------+------------+
+|        8 |         27 |
++----------+------------+
+1 row in set (0.06 sec)
+
+mysql> SELECT ROUND(3.14567,2);
++------------------+
+| ROUND(3.14567,2) |
++------------------+
+|             3.15 |
++------------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT TRUNCATE(3.14567,2);
++---------------------+
+| TRUNCATE(3.14567,2) |
++---------------------+
+|                3.14 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ABS(-12);
++----------+
+| ABS(-12) |
++----------+
+|       12 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT PI();
++----------+
+| PI()     |
++----------+
+| 3.141593 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> SELECT RAND();
++--------------------+
+| RAND()             |
++--------------------+
+| 0.6808652986594153 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT RAND();
++--------------------+
+| RAND()             |
++--------------------+
+| 0.7984468916416605 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT RAND();
++--------------------+
+| RAND()             |
++--------------------+
+| 0.9496385929637017 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT PI();
++----------+
+| PI()     |
++----------+
+| 3.141593 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT RAND();
++---------------------+
+| RAND()              |
++---------------------+
+| 0.35285232062717187 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM cms.cms_user ORDER BY RAND();
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| 14 | lll       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 15 | ttt       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+| 16 | ooo       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+| 13 | TEST2     | TEST2        | user@qq.com | 1381203974 | user.jpg |    20 |   18 | NULL   |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+15 rows in set (0.02 sec)
+
+mysql> SELECT * FROM cms.cms_user ORDER BY RAND();
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+| 15 | ttt       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+| 13 | TEST2     | TEST2        | user@qq.com | 1381203974 | user.jpg |    20 |   18 | NULL   |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+| 16 | ooo       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 14 | lll       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT RAND(1);
++---------------------+
+| RAND(1)             |
++---------------------+
+| 0.40540353712197724 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT RAND(1);
++---------------------+
+| RAND(1)             |
++---------------------+
+| 0.40540353712197724 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SIGN(12),SIGN(0),SIGN(-12);
++----------+---------+-----------+
+| SIGN(12) | SIGN(0) | SIGN(-12) |
++----------+---------+-----------+
+|        1 |       0 |        -1 |
++----------+---------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT EXP(3);
++--------------------+
+| EXP(3)             |
++--------------------+
+| 20.085536923187668 |
++--------------------+
+1 row in set (0.03 sec)
+
+mysql> SELECT CHAR_LENGTH('maizi'),LENGTH('maizi');
++----------------------+-----------------+
+| CHAR_LENGTH('maizi') | LENGTH('maizi') |
++----------------------+-----------------+
+|                    5 |               5 |
++----------------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CHAR_LENGTH('啊'),LENGTH('啊');
++--------------------+---------------+
+| CHAR_LENGTH('啊')  | LENGTH('啊')  |
++--------------------+---------------+
+|                  1 |             3 |
++--------------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT('HELLO','WORLD');
++-------------------------+
+| CONCAT('HELLO','WORLD') |
++-------------------------+
+| HELLOWORLD              |
++-------------------------+
+1 row in set (0.02 sec)
+
+mysql> USE cms;
+Database changed
+mysql> SELECT * FROM student;
++----+----------+-------+
+| id | username | score |
++----+----------+-------+
+|  1 | king     |    95 |
+|  2 | king1    |    35 |
+|  3 | king2    |    45 |
+|  4 | king3    |    55 |
+|  5 | king4    |    65 |
+|  6 | king5    |    75 |
+|  7 | king6    |    80 |
+|  8 | king7    |    90 |
+|  9 | king8    |    25 |
++----+----------+-------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT id,CONCAT(username,'_')FROM student;
++----+----------------------+
+| id | CONCAT(username,'_') |
++----+----------------------+
+|  1 | king_                |
+|  2 | king1_               |
+|  3 | king2_               |
+|  4 | king3_               |
+|  5 | king4_               |
+|  6 | king5_               |
+|  7 | king6_               |
+|  8 | king7_               |
+|  9 | king8_               |
++----+----------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT('a','b',null);
++----------------------+
+| CONCAT('a','b',null) |
++----------------------+
+| NULL                 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS('^_^','a','b','c');
++------------------------------+
+| CONCAT_WS('^_^','a','b','c') |
++------------------------------+
+| a^_^b^_^c                    |
++------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS('','a','b','c');
++---------------------------+
+| CONCAT_WS('','a','b','c') |
++---------------------------+
+| abc                       |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS(NULL,'a','b','c');
++-----------------------------+
+| CONCAT_WS(NULL,'a','b','c') |
++-----------------------------+
+| NULL                        |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS('^_^','a','b','c',NULL);
++-----------------------------------+
+| CONCAT_WS('^_^','a','b','c',NULL) |
++-----------------------------------+
+| a^_^b^_^c                         |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT UPPER('this is a test'),UCASE('this is a test');
++-------------------------+-------------------------+
+| UPPER('this is a test') | UCASE('this is a test') |
++-------------------------+-------------------------+
+| THIS IS A TEST          | THIS IS A TEST          |
++-------------------------+-------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT LOWER('HELLO WORLD'),UCASE('HELLO WORLD');
++----------------------+----------------------+
+| LOWER('HELLO WORLD') | UCASE('HELLO WORLD') |
++----------------------+----------------------+
+| hello world          | HELLO WORLD          |
++----------------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT LOWER('HELLO WORLD'),LCASE('HELLO WORLD');
++----------------------+----------------------+
+| LOWER('HELLO WORLD') | LCASE('HELLO WORLD') |
++----------------------+----------------------+
+| hello world          | hello world          |
++----------------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT LEFT('ABCDEF',2),RIGHT('ABCDEF',2);
++------------------+-------------------+
+| LEFT('ABCDEF',2) | RIGHT('ABCDEF',2) |
++------------------+-------------------+
+| AB               | EF                |
++------------------+-------------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT LPAD('A',5,'?'),RPAD('A',5,'!');
++-----------------+-----------------+
+| LPAD('A',5,'?') | RPAD('A',5,'!') |
++-----------------+-----------------+
+| ????A           | A!!!!           |
++-----------------+-----------------+
+1 row in set (0.04 sec)
+
+mysql> SELECT ' ABC ',CONCAT('_',TRIM(' ABC '),'_'),CONCAT('_',LTRIM(' ABC '),'_'),CONCAT('_',RTRIM(' ABC ','_'));
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'RTRIM'
+mysql> SELECT ' ABC ',CONCAT('_',TRIM(' ABC '),'_'),CONCAT('_',LTRIM(' ABC '),'_'),CONCAT('_',RTRIM(' ABC '),'_'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> SELECT ' ABC ',CONCAT('_',TRIM(' ABC '),'_'),CONCAT('_',LTRIM(' ABC '),'_'),CONCAT('_',RTRIM(' ABC '),'_'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> SELECT CONCAT('_',TRIM(' ABC '),'_'),CONCAT('_',LTRIM(' ABC '),'_'),CONCAT('_',RTRIM(' ABC '),'_');
++-------------------------------+--------------------------------+--------------------------------+
+| CONCAT('_',TRIM(' ABC '),'_') | CONCAT('_',LTRIM(' ABC '),'_') | CONCAT('_',RTRIM(' ABC '),'_') |
++-------------------------------+--------------------------------+--------------------------------+
+| _ABC_                         | _ABC _                         | _ ABC_                         |
++-------------------------------+--------------------------------+--------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT TRIM('A' FROM 'ABCBCA');
++-------------------------+
+| TRIM('A' FROM 'ABCBCA') |
++-------------------------+
+| BCBC                    |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT REPEAT('H',5);
++---------------+
+| REPEAT('H',5) |
++---------------+
+| HHHHH         |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT('_',SPACE(5),'_');
++--------------------------+
+| CONCAT('_',SPACE(5),'_') |
++--------------------------+
+| _     _                  |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT REPLACE('ABCBCA','A','_');
++---------------------------+
+| REPLACE('ABCBCA','A','_') |
++---------------------------+
+| _BCBC_                    |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT REPLACE('ABCBCA','a','_');
++---------------------------+
+| REPLACE('ABCBCA','a','_') |
++---------------------------+
+| ABCBCA                    |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT STRCMP('A','A'),STRCMP('A','a'),STRCMP('B','A');
++-----------------+-----------------+-----------------+
+| STRCMP('A','A') | STRCMP('A','a') | STRCMP('B','A') |
++-----------------+-----------------+-----------------+
+|               0 |               0 |               1 |
++-----------------+-----------------+-----------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT STRCMP('A','A'),STRCMP('A','a'),STRCMP('A','B');
++-----------------+-----------------+-----------------+
+| STRCMP('A','A') | STRCMP('A','a') | STRCMP('A','B') |
++-----------------+-----------------+-----------------+
+|               0 |               0 |              -1 |
++-----------------+-----------------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUBSTRING('ABCDEF',2,2);
++-------------------------+
+| SUBSTRING('ABCDEF',2,2) |
++-------------------------+
+| BC                      |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT REVERSE('ABC');
++----------------+
+| REVERSE('ABC') |
++----------------+
+| CBA            |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ELT(2,'A','B','C');
++--------------------+
+| ELT(2,'A','B','C') |
++--------------------+
+| B                  |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CURDATE(),CURRENT_DATE();
++------------+----------------+
+| CURDATE()  | CURRENT_DATE() |
++------------+----------------+
+| 2015-01-03 | 2015-01-03     |
++------------+----------------+
+1 row in set (0.04 sec)
+
+mysql> SELECT CURTIME(),CURRENT_TIME();
++-----------+----------------+
+| CURTIME() | CURRENT_TIME() |
++-----------+----------------+
+| 15:59:32  | 15:59:32       |
++-----------+----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT NOW();
++---------------------+
+| NOW()               |
++---------------------+
+| 2015-01-03 15:59:37 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MONTH('2015-1-3');
++-------------------+
+| MONTH('2015-1-3') |
++-------------------+
+|                 1 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MONTH(NOW());
++--------------+
+| MONTH(NOW()) |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MONTHNAME(NOW());
++------------------+
+| MONTHNAME(NOW()) |
++------------------+
+| January          |
++------------------+
+1 row in set (0.09 sec)
+
+mysql> SELECT DAYNAME(NOW());
++----------------+
+| DAYNAME(NOW()) |
++----------------+
+| Saturday       |
++----------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT DAYOFWEEK(NOW());
++------------------+
+| DAYOFWEEK(NOW()) |
++------------------+
+|                7 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT WEEKDAY(NOW());
++----------------+
+| WEEKDAY(NOW()) |
++----------------+
+|              5 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT WEEK(NOW());
++-------------+
+| WEEK(NOW()) |
++-------------+
+|           0 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT YEAR(NOW());
++-------------+
+| YEAR(NOW()) |
++-------------+
+|        2015 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT HOUR(NOW());
++-------------+
+| HOUR(NOW()) |
++-------------+
+|          16 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MINUTE(NOW());
++---------------+
+| MINUTE(NOW()) |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SECOND(NOW());
++---------------+
+| SECOND(NOW()) |
++---------------+
+|            49 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT DATEDIFF(CURRENT_DATE(),'1990-1-1');
++-------------------------------------+
+| DATEDIFF(CURRENT_DATE(),'1990-1-1') |
++-------------------------------------+
+|                                9133 |
++-------------------------------------+
+1 row in set (0.02 sec)
+
+mysql> USE cms;
+Database changed
+mysql> SELECT * FROM student;
++----+----------+-------+
+| id | username | score |
++----+----------+-------+
+|  1 | king     |    95 |
+|  2 | king1    |    35 |
+|  3 | king2    |    45 |
+|  4 | king3    |    55 |
+|  5 | king4    |    65 |
+|  6 | king5    |    75 |
+|  7 | king6    |    80 |
+|  8 | king7    |    90 |
+|  9 | king8    |    25 |
++----+----------+-------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT id,username,score,IF(score>=60,'及格','不及格')FROM student;
++----+----------+-------+------------------------------------+
+| id | username | score | IF(score>=60,'及格','不及格')      |
++----+----------+-------+------------------------------------+
+|  1 | king     |    95 | 及格                               |
+|  2 | king1    |    35 | 不及格                             |
+|  3 | king2    |    45 | 不及格                             |
+|  4 | king3    |    55 | 不及格                             |
+|  5 | king4    |    65 | 及格                               |
+|  6 | king5    |    75 | 及格                               |
+|  7 | king6    |    80 | 及格                               |
+|  8 | king7    |    90 | 及格                               |
+|  9 | king8    |    25 | 不及格                             |
++----+----------+-------+------------------------------------+
+9 rows in set (0.03 sec)
+
+mysql> SELECT * cms_user;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cms_user' at line 1
+mysql> SELECT * FROM cms_user;
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+| id | username  | password     | email       | regTime    | face     | proId | age  | sex    |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+|  1 | 张三      | zhangsan     | user@qq.com | 1419811708 | user.jpg |     1 |   21 | 男     |
+|  2 | 张三丰    | zhangsanfeng | user@qq.com | 1419812708 | user.jpg |     2 |   31 | 女     |
+|  3 | 章子怡    | zhangsan     | user@qq.com | 1419813708 | user.jpg |     3 |   43 | 男     |
+|  4 | long      | long         | user@qq.com | 1419814708 | user.jpg |     4 |   41 | 女     |
+|  5 | ring      | ring         | user@qq.com | 1419815708 | user.jpg |     2 |    9 | 男     |
+|  6 | queen     | queen        | user@qq.com | 1419861708 | user.jpg |     3 |   77 | 女     |
+|  8 | blek      | blek         | user@qq.com | 1419818708 | user.jpg |     1 |   85 | 女     |
+|  9 | rose      | rose         | user@qq.com | 1419821708 | user.jpg |     2 |    9 | 男     |
+| 10 | lily      | lily         | user@qq.com | 1419831708 | user.jpg |     2 |   39 | 女     |
+| 11 | john      | john         | user@qq.com | 1419841708 | user.jpg |     2 |   72 | 保密   |
+| 12 | test1     | test1        | user@qq.com | 1419811708 | user.jpg |     1 | NULL | 保密   |
+| 13 | TEST2     | TEST2        | user@qq.com | 1381203974 | user.jpg |    20 |   18 | NULL   |
+| 14 | lll       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+| 15 | ttt       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
+| 16 | ooo       | lll          | user@qq.com |  138212349 | user.jpg |     2 |   18 | NULL   |
++----+-----------+--------------+-------------+------------+----------+-------+------+--------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,age,IFNULL(age,'100')FROM cms_user;
++----+-----------+------+-------------------+
+| id | username  | age  | IFNULL(age,'100') |
++----+-----------+------+-------------------+
+|  1 | 张三      |   21 | 21                |
+|  2 | 张三丰    |   31 | 31                |
+|  3 | 章子怡    |   43 | 43                |
+|  4 | long      |   41 | 41                |
+|  5 | ring      |    9 | 9                 |
+|  6 | queen     |   77 | 77                |
+|  8 | blek      |   85 | 85                |
+|  9 | rose      |    9 | 9                 |
+| 10 | lily      |   39 | 39                |
+| 11 | john      |   72 | 72                |
+| 12 | test1     | NULL | 100               |
+| 13 | TEST2     |   18 | 18                |
+| 14 | lll       |   18 | 18                |
+| 15 | ttt       |   18 | 18                |
+| 16 | ooo       |   18 | 18                |
++----+-----------+------+-------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT id,username,score, CASE WHEN score>60 THEN '挺好继续努力' WHEN score=60 THEN '太险了刚及格' ELSE ‘没及格哟’END FROM student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM student' at line 1
+mysql> SELECT id,username,score, CASE WHEN score>60 THEN '不错' WHEN score=60 THEN '刚及格' ELSE '没及格' END FROM student;
++----+----------+-------+--------------------------------------------------------------------------------------+
+| id | username | score | CASE WHEN score>60 THEN '不错' WHEN score=60 THEN '刚及格' ELSE '没及格' END         |
++----+----------+-------+--------------------------------------------------------------------------------------+
+|  1 | king     |    95 | 不错                                                                                 |
+|  2 | king1    |    35 | 没及格                                                                               |
+|  3 | king2    |    45 | 没及格                                                                               |
+|  4 | king3    |    55 | 没及格                                                                               |
+|  5 | king4    |    65 | 不错                                                                                 |
+|  6 | king5    |    75 | 不错                                                                                 |
+|  7 | king6    |    80 | 不错                                                                                 |
+|  8 | king7    |    90 | 不错                                                                                 |
+|  9 | king8    |    25 | 没及格                                                                               |
++----+----------+-------+--------------------------------------------------------------------------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT id,username,score, CASE WHEN score>60 THEN '不错' WHEN score=80 THEN '刚及格' ELSE '没及格' END FROM student;
++----+----------+-------+--------------------------------------------------------------------------------------+
+| id | username | score | CASE WHEN score>60 THEN '不错' WHEN score=80 THEN '刚及格' ELSE '没及格' END         |
++----+----------+-------+--------------------------------------------------------------------------------------+
+|  1 | king     |    95 | 不错                                                                                 |
+|  2 | king1    |    35 | 没及格                                                                               |
+|  3 | king2    |    45 | 没及格                                                                               |
+|  4 | king3    |    55 | 没及格                                                                               |
+|  5 | king4    |    65 | 不错                                                                                 |
+|  6 | king5    |    75 | 不错                                                                                 |
+|  7 | king6    |    80 | 不错                                                                                 |
+|  8 | king7    |    90 | 不错                                                                                 |
+|  9 | king8    |    25 | 没及格                                                                               |
++----+----------+-------+--------------------------------------------------------------------------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT id,username,score, CASE WHEN score>80 THEN '不错' WHEN score=60 THEN '刚及格' ELSE '没及格' END FROM student;
++----+----------+-------+--------------------------------------------------------------------------------------+
+| id | username | score | CASE WHEN score>80 THEN '不错' WHEN score=60 THEN '刚及格' ELSE '没及格' END         |
++----+----------+-------+--------------------------------------------------------------------------------------+
+|  1 | king     |    95 | 不错                                                                                 |
+|  2 | king1    |    35 | 没及格                                                                               |
+|  3 | king2    |    45 | 没及格                                                                               |
+|  4 | king3    |    55 | 没及格                                                                               |
+|  5 | king4    |    65 | 没及格                                                                               |
+|  6 | king5    |    75 | 没及格                                                                               |
+|  7 | king6    |    80 | 没及格                                                                               |
+|  8 | king7    |    90 | 不错                                                                                 |
+|  9 | king8    |    25 | 没及格                                                                               |
++----+----------+-------+--------------------------------------------------------------------------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT id,username,score, CASE WHEN score>60 THEN '不错' WHEN score=60 THEN '刚及格' ELSE '没及格' END FROM student;
++----+----------+-------+--------------------------------------------------------------------------------------+
+| id | username | score | CASE WHEN score>60 THEN '不错' WHEN score=60 THEN '刚及格' ELSE '没及格' END         |
++----+----------+-------+--------------------------------------------------------------------------------------+
+|  1 | king     |    95 | 不错                                                                                 |
+|  2 | king1    |    35 | 没及格                                                                               |
+|  3 | king2    |    45 | 没及格                                                                               |
+|  4 | king3    |    55 | 没及格                                                                               |
+|  5 | king4    |    65 | 不错                                                                                 |
+|  6 | king5    |    75 | 不错                                                                                 |
+|  7 | king6    |    80 | 不错                                                                                 |
+|  8 | king7    |    90 | 不错                                                                                 |
+|  9 | king8    |    25 | 没及格                                                                               |
++----+----------+-------+--------------------------------------------------------------------------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT VERSION();
++------------+
+| VERSION()  |
++------------+
+| 5.6.22-log |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONNECTION_ID();
++-----------------+
+| CONNECTION_ID() |
++-----------------+
+|               1 |
++-----------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT DATABASE(),SCHEMA();
++------------+----------+
+| DATABASE() | SCHEMA() |
++------------+----------+
+| cms        | cms      |
++------------+----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT USER(),STSTEM_USER();
+ERROR 1305 (42000): FUNCTION cms.STSTEM_USER does not exist
+mysql> SELECT USER(),SYSTEM_USER();
++----------------+----------------+
+| USER()         | SYSTEM_USER()  |
++----------------+----------------+
+| root@localhost | root@localhost |
++----------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CURRENT_USER(),CURRENT_USER;
++----------------+----------------+
+| CURRENT_USER() | CURRENT_USER   |
++----------------+----------------+
+| root@localhost | root@localhost |
++----------------+----------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT CHARSET('AAA');
++----------------+
+| CHARSET('AAA') |
++----------------+
+| utf8           |
++----------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT COLLATION('AAA');
++------------------+
+| COLLATION('AAA') |
++------------------+
+| utf8_general_ci  |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW CREATE TABLE student;
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table   | Create Table                                                                                                                                                                                                                                                                  |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| student | CREATE TABLE `student` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `score` tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 |
++---------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.03 sec)
+
+mysql> SELECT LAST_INSERT_ID();
++------------------+
+| LAST_INSERT_ID() |
++------------------+
+|               14 |
++------------------+
+1 row in set (0.03 sec)
+
+mysql> INSERT student(username,score) VALUES('AAAA',12);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> SELECT LAST_INSERT_ID();
++------------------+
+| LAST_INSERT_ID() |
++------------------+
+|               10 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MD5('ADMIN');
++----------------------------------+
+| MD5('ADMIN')                     |
++----------------------------------+
+| 73acd9a5972130b75066c82595a1fae3 |
++----------------------------------+
+1 row in set (0.07 sec)
+
+mysql> SELECT LENGTH(MD5('ADMIN'));
++----------------------+
+| LENGTH(MD5('ADMIN')) |
++----------------------+
+|                   32 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> USE mysql;
+Database changed
+mysql> SHOW TABLES;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| event                     |
+| func                      |
+| general_log               |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+28 rows in set (0.03 sec)
+
+mysql> SELECT * FROM user \G;
+*************************** 1. row ***************************
+                  Host: localhost
+                  User: root
+              Password: *81F5E21E35407D884A6CD4A731AEBFB6AF209E1B
+           Select_priv: Y
+           Insert_priv: Y
+           Update_priv: Y
+           Delete_priv: Y
+           Create_priv: Y
+             Drop_priv: Y
+           Reload_priv: Y
+         Shutdown_priv: Y
+          Process_priv: Y
+             File_priv: Y
+            Grant_priv: Y
+       References_priv: Y
+            Index_priv: Y
+            Alter_priv: Y
+          Show_db_priv: Y
+            Super_priv: Y
+ Create_tmp_table_priv: Y
+      Lock_tables_priv: Y
+          Execute_priv: Y
+       Repl_slave_priv: Y
+      Repl_client_priv: Y
+      Create_view_priv: Y
+        Show_view_priv: Y
+   Create_routine_priv: Y
+    Alter_routine_priv: Y
+      Create_user_priv: Y
+            Event_priv: Y
+          Trigger_priv: Y
+Create_tablespace_priv: Y
+              ssl_type: 
+            ssl_cipher: 
+           x509_issuer: 
+          x509_subject: 
+         max_questions: 0
+           max_updates: 0
+       max_connections: 0
+  max_user_connections: 0
+                plugin: 
+ authentication_string: 
+      password_expired: N
+*************************** 2. row ***************************
+                  Host: 127.0.0.1
+                  User: root
+              Password: *81F5E21E35407D884A6CD4A731AEBFB6AF209E1B
+           Select_priv: Y
+           Insert_priv: Y
+           Update_priv: Y
+           Delete_priv: Y
+           Create_priv: Y
+             Drop_priv: Y
+           Reload_priv: Y
+         Shutdown_priv: Y
+          Process_priv: Y
+             File_priv: Y
+            Grant_priv: Y
+       References_priv: Y
+            Index_priv: Y
+            Alter_priv: Y
+          Show_db_priv: Y
+            Super_priv: Y
+ Create_tmp_table_priv: Y
+      Lock_tables_priv: Y
+          Execute_priv: Y
+       Repl_slave_priv: Y
+      Repl_client_priv: Y
+      Create_view_priv: Y
+        Show_view_priv: Y
+   Create_routine_priv: Y
+    Alter_routine_priv: Y
+      Create_user_priv: Y
+            Event_priv: Y
+          Trigger_priv: Y
+Create_tablespace_priv: Y
+              ssl_type: 
+            ssl_cipher: 
+           x509_issuer: 
+          x509_subject: 
+         max_questions: 0
+           max_updates: 0
+       max_connections: 0
+  max_user_connections: 0
+                plugin: 
+ authentication_string: 
+      password_expired: N
+*************************** 3. row ***************************
+                  Host: ::1
+                  User: root
+              Password: *81F5E21E35407D884A6CD4A731AEBFB6AF209E1B
+           Select_priv: Y
+           Insert_priv: Y
+           Update_priv: Y
+           Delete_priv: Y
+           Create_priv: Y
+             Drop_priv: Y
+           Reload_priv: Y
+         Shutdown_priv: Y
+          Process_priv: Y
+             File_priv: Y
+            Grant_priv: Y
+       References_priv: Y
+            Index_priv: Y
+            Alter_priv: Y
+          Show_db_priv: Y
+            Super_priv: Y
+ Create_tmp_table_priv: Y
+      Lock_tables_priv: Y
+          Execute_priv: Y
+       Repl_slave_priv: Y
+      Repl_client_priv: Y
+      Create_view_priv: Y
+        Show_view_priv: Y
+   Create_routine_priv: Y
+    Alter_routine_priv: Y
+      Create_user_priv: Y
+            Event_priv: Y
+          Trigger_priv: Y
+Create_tablespace_priv: Y
+              ssl_type: 
+            ssl_cipher: 
+           x509_issuer: 
+          x509_subject: 
+         max_questions: 0
+           max_updates: 0
+       max_connections: 0
+  max_user_connections: 0
+                plugin: 
+ authentication_string: 
+      password_expired: N
+*************************** 4. row ***************************
+                  Host: %
+                  User: king
+              Password: *0C6F8A2CE8ABFD18609CCE4CDFAB3C15DAD20718
+           Select_priv: Y
+           Insert_priv: Y
+           Update_priv: Y
+           Delete_priv: Y
+           Create_priv: Y
+             Drop_priv: Y
+           Reload_priv: Y
+         Shutdown_priv: Y
+          Process_priv: Y
+             File_priv: Y
+            Grant_priv: Y
+       References_priv: Y
+            Index_priv: Y
+            Alter_priv: Y
+          Show_db_priv: Y
+            Super_priv: Y
+ Create_tmp_table_priv: Y
+      Lock_tables_priv: Y
+          Execute_priv: Y
+       Repl_slave_priv: Y
+      Repl_client_priv: Y
+      Create_view_priv: Y
+        Show_view_priv: Y
+   Create_routine_priv: Y
+    Alter_routine_priv: Y
+      Create_user_priv: Y
+            Event_priv: Y
+          Trigger_priv: Y
+Create_tablespace_priv: Y
+              ssl_type: 
+            ssl_cipher: 
+           x509_issuer: 
+          x509_subject: 
+         max_questions: 0
+           max_updates: 0
+       max_connections: 0
+  max_user_connections: 0
+                plugin: mysql_native_password
+ authentication_string: 
+      password_expired: N
+4 rows in set (0.14 sec)
+
+ERROR: 
+No query specified
+
+mysql> SELECT PASSWORD('root'),PASSWORD('king');
++-------------------------------------------+-------------------------------------------+
+| PASSWORD('root')                          | PASSWORD('king')                          |
++-------------------------------------------+-------------------------------------------+
+| *81F5E21E35407D884A6CD4A731AEBFB6AF209E1B | *0C6F8A2CE8ABFD18609CCE4CDFAB3C15DAD20718 |
++-------------------------------------------+-------------------------------------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT FORMAT(3.14567,2);
++-------------------+
+| FORMAT(3.14567,2) |
++-------------------+
+| 3.15              |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ASCII('abc');
++--------------+
+| ASCII('abc') |
++--------------+
+|           97 |
++--------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT BIN(5),HEX(5),OCT(5);
++--------+--------+--------+
+| BIN(5) | HEX(5) | OCT(5) |
++--------+--------+--------+
+| 101    | 5      | 5      |
++--------+--------+--------+
+1 row in set (0.02 sec)
+
+mysql> SELECT CONV(5,10,2);
++--------------+
+| CONV(5,10,2) |
++--------------+
+| 101          |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONV(35,10,2);
++---------------+
+| CONV(35,10,2) |
++---------------+
+| 100011        |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONV(35,10,8);
++---------------+
+| CONV(35,10,8) |
++---------------+
+| 43            |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONV(35,10,16);
++----------------+
+| CONV(35,10,16) |
++----------------+
+| 23             |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT INET_ATON('127.0.0.1');
++------------------------+
+| INET_ATON('127.0.0.1') |
++------------------------+
+|             2130706433 |
++------------------------+
+1 row in set (0.06 sec)
+
+mysql> SELECT INET_NOTA(2130706433);
+ERROR 1305 (42000): FUNCTION mysql.INET_NOTA does not exist
+mysql> SELECT INET_NTOA(2130706433);
++-----------------------+
+| INET_NTOA(2130706433) |
++-----------------------+
+| 127.0.0.1             |
++-----------------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT GET_LOCK('KING',10);
++---------------------+
+| GET_LOCK('KING',10) |
++---------------------+
+|                   1 |
++---------------------+
+1 row in set (0.05 sec)
+
+mysql> SELECT IS_FREE)LOCK('KING');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')LOCK('KING')' at line 1
+mysql> SELECT IS_FREE_LOCK('KING');
++----------------------+
+| IS_FREE_LOCK('KING') |
++----------------------+
+|                    0 |
++----------------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT IS_FREE_LOCK('KING');
++----------------------+
+| IS_FREE_LOCK('KING') |
++----------------------+
+|                    0 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT IS_FREE_LOCK('KING');
++----------------------+
+| IS_FREE_LOCK('KING') |
++----------------------+
+|                    0 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT IS_FREE_LOCK('KING');
++----------------------+
+| IS_FREE_LOCK('KING') |
++----------------------+
+|                    0 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT RELEASE_LOCK('KING');
++----------------------+
+| RELEASE_LOCK('KING') |
++----------------------+
+|                    1 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT IS_FREE_LOCK('KING');
++----------------------+
+| IS_FREE_LOCK('KING') |
++----------------------+
+|                    1 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT GET_LOCK('MAIZI',10);
++----------------------+
+| GET_LOCK('MAIZI',10) |
++----------------------+
+|                    1 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT IS_FREE_LOCK('MAIZI');
++-----------------------+
+| IS_FREE_LOCK('MAIZI') |
++-----------------------+
+|                     0 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT GET_LOCK('AB',5);
++------------------+
+| GET_LOCK('AB',5) |
++------------------+
+|                1 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT IS_FREE_LOCK('MAIZI');
++-----------------------+
+| IS_FREE_LOCK('MAIZI') |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW TABLES;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| event                     |
+| func                      |
+| general_log               |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+28 rows in set (0.00 sec)
+
+mysql> USE cms;
+Database changed
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_cms |
++---------------+
+| cms_admin     |
+| cms_cate      |
+| cms_news      |
+| cms_user      |
+| department    |
+| employee      |
+| provinces     |
+| scholarship   |
+| student       |
+| test1         |
+| test2         |
+| test3         |
++---------------+
+12 rows in set (0.00 sec)
+
+
+mysql> \t

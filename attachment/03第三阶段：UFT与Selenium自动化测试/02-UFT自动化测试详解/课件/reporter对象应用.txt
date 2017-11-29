@@ -1,0 +1,20 @@
+Dim oldfilter
+oldfilter=reporter.Filter
+msgbox oldfilter
+reporter.Filter=rfEnableErrorsAndWarnings
+Dialog("Login").WinEdit("Agent Name:").Set "mercury"
+Dialog("Login").WinEdit("Password:").Set "mer"
+Dialog("Login").WinButton("OK").Click
+If dialog("Login").Dialog("Flight Reservations").Exist(3) Then
+	actualmsg=dialog("Login").Dialog("Flight Reservations").Static("loginmsg").GetROProperty("text")
+	expectmsg="password incorrect!"
+	If actualmsg=expectmsg Then
+		reporter.ReportEvent micPass,"登录功能测试","提示信息与期望结果一致，测试通过"
+	else
+		reporter.ReportEvent micFail,"登录功能测试","提示信息与期望结果不一致，期望结果是:"&expectmsg&",实际结果是:"&actualmsg
+	End If
+	dialog("Login").Dialog("Flight Reservations").WinButton("确定").Click
+else
+	reporter.ReportEvent micWarning,"登录功能测试","未能出现提示信息"
+End If
+'Window("Flight Reservation").Close
